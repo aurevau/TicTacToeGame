@@ -5,10 +5,6 @@ public class InputHandler {
 
 
     public static String getString(){
-        while(input.hasNextInt()){
-            System.out.println("Try again, please use a name not a number");
-            input.nextLine();
-        }
         return input.nextLine();
     }
 
