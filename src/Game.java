@@ -34,7 +34,11 @@ public class Game {
             } else {
                     if (board[inputNumber - 1].equalsIgnoreCase("")) {
                         board[inputNumber - 1] = currentPlayer.getTurn();
-                        checkWinner();
+                        if(checkWinner()) {
+                            System.out.println("Press Enter to play again!");
+                            InputHandler.getString();
+                            printBoard();
+                        }
                         takeTurns();
 
                     } else {
@@ -114,43 +118,43 @@ public class Game {
         }
     }
 
-    public void checkWinner(){
+    public boolean checkWinner(){
         if (!board[0].equals("") && board[0].equals(board[1]) && board[1].equals(board[2])) {
             System.out.println("Winner is " + currentPlayer.getName());
-            return;
+            return true;
         }
         if(!board[3].equals("") && board[3].equals(board[4]) && board[4].equals(board[5])) {
             System.out.println("Winner is " + currentPlayer.getName());
-            return;
+            return true;
         }
         if (!board[6].equals("") && board[6].equals(board[7]) && board[7].equals(board[8])) {
             System.out.println("Winner is " + currentPlayer.getName());
-            return;
+            return true;
         }
 
         if (!board[0].equals("") && board[0].equals(board[3]) && board[3].equals(board[6])) {
             System.out.println("Winner is " + currentPlayer.getName());
-            return;
+            return true;
         }
 
         if(!board[1].equals("") && board[1].equals(board[4]) && board[4].equals(board[7])) {
             System.out.println("Winner is " + currentPlayer.getName());
-            return;
+            return true;
         }
 
         if (!board[2].equals("") && board[2].equals(board[5]) && board[5].equals(board[8])) {
             System.out.println("Winner is " + currentPlayer.getName());
-            return;
+            return true;
         }
 
         if (!board[0].equals("") && board[0].equals(board[4]) && board[4].equals(board[8])) {
             System.out.println("Winner is " + currentPlayer.getName());
-            return;
+            return true;
         }
 
         if (!board[2].equals("") && board[2].equals(board[4]) && board[4].equals(board[6])) {
             System.out.println("Winner is " + currentPlayer.getName());
-            return;
+            return true;
         }
 
         boolean draw = true;
@@ -164,7 +168,8 @@ public class Game {
 
         if (draw) {
             System.out.println("It's a draw!");
-        }
+
+        } return false;
     }
 
 }
