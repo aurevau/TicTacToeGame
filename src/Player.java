@@ -2,7 +2,9 @@ public class Player {
 
     private String name;
     private int wins;
-    String turn;
+    private int losses;
+    private int draws;
+    private String turn;
 
 
     public Player(String name) {
