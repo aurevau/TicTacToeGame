@@ -8,6 +8,7 @@ public class Game {
     private Player currentPlayer = p1;
     private Player opponent;
     List<Player> players = new ArrayList<>();
+    private boolean running = true;
 
     static String[] board;
     public Game() {
@@ -23,11 +24,11 @@ public class Game {
         return computerChoice;
     }
     public void run(){
+
         System.out.println("Welcome to Tic Tac Toe!");
         chooseGame();
         setTurns();
         createBoard();
-
         getinput();
 
 
@@ -38,6 +39,8 @@ public class Game {
         System.out.println("Do you want to play against a friend or the computer?");
         System.out.println("1. Against a friend");
         System.out.println("2. Against a computer");
+        System.out.println("3. Quit Game");
+
 
         int choice = InputHandler.getInt();
 
@@ -46,6 +49,10 @@ public class Game {
             break;
             case 2: createPlayers(1);
             break;
+            case 3:
+                System.out.println("Welcome Back!");
+                System.exit(0);
+                break;
         }
     }
 
@@ -73,9 +80,12 @@ public class Game {
                         printBoard();
                         if(checkWinner()) {
                             printScore();
-                            System.out.println("Press Enter to play again!");
-                            InputHandler.getString();
+                            System.out.println("Press Enter to play again!(quit to quit game)");
+                            if(InputHandler.getString().equalsIgnoreCase("quit")){
+                                break;
+                            }
                             printBoard();
+                            createBoard();
                         }
                         takeTurns();
 
@@ -263,7 +273,7 @@ public class Game {
         boolean draw = true;
 
         for(int i = 0; i < board.length; i++){
-            if(!board[i].equals("")) {
+            if(board[i].equals("")) {
                 draw = false;
                 break;
             }
@@ -274,7 +284,9 @@ public class Game {
             System.out.println("It's a draw!");
             currentPlayer.setDraws(+1);
             opponent.setDraws(+1);
-        } return false;
+            return true;
+        }
+        return false;
     }
 
 }
