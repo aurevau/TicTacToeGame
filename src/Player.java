@@ -6,6 +6,21 @@ public class Player {
     private int draws;
     private String turn;
 
+    public int getLosses() {
+        return losses;
+    }
+
+    public void setLosses(int losses) {
+        this.losses = losses;
+    }
+
+    public int getDraws() {
+        return draws;
+    }
+
+    public void setDraws(int draws) {
+        this.draws = draws;
+    }
 
     public Player(String name) {
         this.name = name;

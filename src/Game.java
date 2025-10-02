@@ -31,6 +31,7 @@ public class Game {
         getinput();
 
 
+
     }
 
     public void chooseGame(){
@@ -71,6 +72,7 @@ public class Game {
                         board[inputNumber - 1] = currentPlayer.getTurn();
                         printBoard();
                         if(checkWinner()) {
+                            printScore();
                             System.out.println("Press Enter to play again!");
                             InputHandler.getString();
                             printBoard();
@@ -195,42 +197,66 @@ public class Game {
         }
     }
 
+    public void printScore(){
+        System.out.println(p1.getName() + " | " + p2.getName() + " | ");
+        System.out.println("Wins   | " + p1.getWins() + "  |  " + p2.getWins() + " | ");
+        System.out.println("Losses | " + p1.getLosses() + "  | " + p2.getLosses() + "  | ");
+        System.out.println("Draws  | " + p1.getDraws() + "  |  " + p2.getDraws() + " | ");
+
+    }
+
     public boolean checkWinner(){
         if (!board[0].equals("") && board[0].equals(board[1]) && board[1].equals(board[2])) {
             System.out.println("Winner is " + currentPlayer.getName());
+            currentPlayer.setWins(+1);
+            opponent.setLosses(+1);
             return true;
         }
         if(!board[3].equals("") && board[3].equals(board[4]) && board[4].equals(board[5])) {
             System.out.println("Winner is " + currentPlayer.getName());
+            currentPlayer.setWins(+1);
+            opponent.setLosses(+1);
             return true;
         }
         if (!board[6].equals("") && board[6].equals(board[7]) && board[7].equals(board[8])) {
             System.out.println("Winner is " + currentPlayer.getName());
+            currentPlayer.setWins(+1);
+            opponent.setLosses(+1);
             return true;
         }
 
         if (!board[0].equals("") && board[0].equals(board[3]) && board[3].equals(board[6])) {
             System.out.println("Winner is " + currentPlayer.getName());
+            currentPlayer.setWins(+1);
+            opponent.setLosses(+1);
             return true;
         }
 
         if(!board[1].equals("") && board[1].equals(board[4]) && board[4].equals(board[7])) {
             System.out.println("Winner is " + currentPlayer.getName());
+            currentPlayer.setWins(+1);
+            opponent.setLosses(+1);
             return true;
         }
 
         if (!board[2].equals("") && board[2].equals(board[5]) && board[5].equals(board[8])) {
             System.out.println("Winner is " + currentPlayer.getName());
+            currentPlayer.setWins(+1);
+            opponent.setLosses(+1);
             return true;
         }
 
         if (!board[0].equals("") && board[0].equals(board[4]) && board[4].equals(board[8])) {
             System.out.println("Winner is " + currentPlayer.getName());
+            currentPlayer.setWins(+1);
+            opponent.setLosses(+1);
             return true;
         }
 
         if (!board[2].equals("") && board[2].equals(board[4]) && board[4].equals(board[6])) {
             System.out.println("Winner is " + currentPlayer.getName());
+            currentPlayer.setWins(+1);
+            opponent.setLosses(+1);
             return true;
         }
 
@@ -241,11 +267,13 @@ public class Game {
                 draw = false;
                 break;
             }
+
         }
 
         if (draw) {
             System.out.println("It's a draw!");
-
+            currentPlayer.setDraws(+1);
+            opponent.setDraws(+1);
         } return false;
     }
 
