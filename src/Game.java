@@ -1,7 +1,12 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Game {
     private Player p1;
     private Player p2;
     private Player currentPlayer = p1;
+    private Player opponent;
+    List<Player> players = new ArrayList<>();
 
     static String[] board;
     public Game() {
@@ -10,14 +15,34 @@ public class Game {
 
 
     }
+
+    public void createComputer(){
+        p2 = new Player("Computer");
+    }
     public void run(){
         System.out.println("Welcome to Tic Tac Toe!");
-        createBoard();
-        createPlayers();
+        chooseGame();
         setTurns();
+        createBoard();
+
         getinput();
 
 
+    }
+
+    public void chooseGame(){
+        System.out.println("Do you want to play against a friend or the computer?");
+        System.out.println("1. Against a friend");
+        System.out.println("2. Against a computer");
+
+        int choice = InputHandler.getInt();
+
+        switch(choice){
+            case 1: createPlayers(2);
+            break;
+            case 2: createPlayers(1);
+            break;
+        }
     }
 
     public void getinput() {
@@ -48,10 +73,10 @@ public class Game {
         }
     }
     public void takeTurns(){
-        if (currentPlayer == p1) {
-            currentPlayer = p2;
-        } else if (currentPlayer == p2) {
-            currentPlayer = p1;
+        if (currentPlayer == players.get(0)) {
+            currentPlayer = players.get(1);
+        } else if (currentPlayer == players.get(1)) {
+            currentPlayer = players.get(0);
         }
     }
 
@@ -59,16 +84,17 @@ public class Game {
 
         while (true) {
             System.out.println("Player 1, choose your weapon: 'x' or 'o'");
-            p1.setTurn(InputHandler.getString());
-            currentPlayer = p1;
+            players.get(0).setTurn(InputHandler.getString());
+            currentPlayer = players.get(0);
+            opponent = players.get(1);
 
-            if (p1.getTurn().equalsIgnoreCase("X")) {
-                p2.setTurn("O");
+            if (players.get(0).getTurn().equalsIgnoreCase("X")) {
+                players.get(1).setTurn("O");
 
                 break;
 
-            } else if (p1.getTurn().equalsIgnoreCase("O")) {
-                p2.setTurn("X");
+            } else if (players.get(0).getTurn().equalsIgnoreCase("O")) {
+                players.get(1).setTurn("X");
                 break;
 
             } else {
@@ -77,9 +103,40 @@ public class Game {
 
         }
         System.out.println("These are your weapons: ");
-        System.out.println("Player 1: " + p1.getTurn());
-        System.out.println("Player 2: " + p2.getTurn());
+        System.out.println("Player 1: " + players.get(0).getTurn());
+        System.out.println("Player 2: " + players.get(1).getTurn());
 
+    }
+
+    public void createPlayers(int playerNumber){
+        for (int i = 0; i < playerNumber; i++){
+            while(true){
+                System.out.println("Player " + (i + 1) + ", choose your name: ");
+                String name = InputHandler.getString();
+
+                boolean duplicate = false;
+                for (Player p : players){
+                    if (p.getName().equalsIgnoreCase(name)){
+                        duplicate = true;
+                        break;
+                    }
+                }
+
+                if (duplicate){
+                    System.out.println("Name already exsists, try again!");
+                } else{
+                    players.add(new Player(name));
+                    break;
+                }
+
+                p1 = players.get(0);
+                if (playerNumber > 1) {
+                    p2 = players.get(2);
+                } else {
+                    p2 = new Player("Computer");
+                }
+            }
+        }
     }
     public void createPlayers() {
         System.out.println("Player 1, choose your name: ");
