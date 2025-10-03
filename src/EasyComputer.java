@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class EasyComputer implements ComputerPlayer{
+public class EasyComputer implements ComputerPlayer {
     private Random rng = new Random();
     private GameBoard board;
 
@@ -9,10 +9,10 @@ public class EasyComputer implements ComputerPlayer{
     }
 
     @Override
-    public int computerChoice() {
+    public int computerChoice(String symbol, String opponentSymbol) {
         int choice;
-            choice = rng.nextInt(board.getSize());
-            return choice;
+        choice = rng.nextInt(board.getSize());
+        return choice;
     }
 
 }

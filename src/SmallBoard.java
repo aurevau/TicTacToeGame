@@ -1,5 +1,5 @@
 public class SmallBoard extends GameBoard {
-    private String[] board;
+
 
     public SmallBoard() {
         createBoard();
@@ -15,12 +15,22 @@ public class SmallBoard extends GameBoard {
     }
 
     @Override
+    public String getCell(int index) {
+        if (index < 0 ||index >= board.length){
+            throw new IllegalArgumentException("index out of bounds" + index);
+        }
+        return board[index];
+    }
+
+    @Override
     public void createBoard() {
         board = new String[9];
         for (int i = 0; i < board.length; i++) {
             board[i] = "";
         }
     }
+
+
 
     @Override
     public void printBoard() {
@@ -31,6 +41,8 @@ public class SmallBoard extends GameBoard {
             }
         }
     }
+
+
 
     @Override
     public String checkWinner() {
@@ -80,20 +92,32 @@ public class SmallBoard extends GameBoard {
         return "";
     }
 
-
     @Override
-    public boolean setMove(int index, String symbol) {
+    public int findWinningMove(String symbol) {
+        int[][] winPatterns = {
+                {0, 1, 2}, {3, 4, 5}, {6, 7, 8},
+                {0, 3, 6}, {1, 4, 7}, {2, 5, 8},
+                {0, 4, 8}, {2, 4, 6}
+        };
 
-        if (index < 0 || index >= board.length) {
-            System.out.println("Invalid input, choose a number between 1-9");
-            return false;
+        for (int[] pattern : winPatterns) {
+            int count = 0;
+            int emptyIndex = -1;
+
+            for (int i : pattern) {
+                if (board[i].equals(symbol)) {
+                    count++;
+                } else if (board[i].isEmpty() && emptyIndex == -1) {
+                    emptyIndex = i; // spara första tomma
+                }
+            }
+
+            if (count == 2 && emptyIndex != -1) {
+                return emptyIndex; // returnera vinnande ruta
+            }
         }
-        if (!board[index].isEmpty()) {
-            System.out.println("Slot is already filled, try again!");
-            return false;
-        }
-        // Sets move
-        board[index] = symbol;
-        return true;
+
+        return -1; // ingen vinnande ruta
     }
+
 }

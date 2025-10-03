@@ -11,6 +11,7 @@ public class InputHandler {
     public static int getInt(){
         while(!input.hasNextInt()){
             System.out.println("Invalid input. Please try again with a number!");
+            input.nextLine();
         }
 
         // Declare variable to be able to clear the scanner to not end up in a forever-loop

@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Game {
     private Player p1;
@@ -16,6 +15,8 @@ public class Game {
         run();
 
 
+
+
     }
 
 
@@ -26,10 +27,27 @@ public class Game {
         chooseGame();
         chooseOpponent();
         setSymbols();
-        getinput();
-        checkInput();
+        gameLoop();
 
 
+
+
+
+    }
+
+    public void gameLoop(){
+        boolean gameOver = false;
+
+        while (!gameOver){
+            board.printBoard();
+            int inputNumber = getInput();
+            board.setMove(inputNumber, currentPlayer.getSymbol());
+            gameOver = checkInput();
+
+            if (!gameOver) {
+                takeTurns();
+            }
+        }
     }
 
     public void chooseGame() {
@@ -65,7 +83,6 @@ public class Game {
                 break;
             case 2:
                 createPlayers(1);
-                chooseLevel();
                 break;
             case 3:
                 System.out.println("Welcome Back!");
@@ -88,10 +105,10 @@ public class Game {
                 cpu = new EasyComputer(board);
                 System.out.println("You choose easy computer");
                 break;
-//            case 2:
-//                cpu = new MediumComputer(board);
-//                System.out.println("You choose medium computer");
-//                break;
+            case 2:
+                cpu = new MediumComputer(board);
+                System.out.println("You choose medium computer");
+                break;
 //            case 3:
 //                cpu = new HardComputer(board);
 //                System.out.println("You choose hard computer");
@@ -103,25 +120,25 @@ public class Game {
         }
     }
 
-    public void getinput() {
-        int inputNumber;
-        while (true) {
-            if (currentPlayer.getName().equals("Computer")) {
-                inputNumber = cpu.computerChoice();
-                System.out.println("Computer chooses " + (inputNumber));
+    public int getInput() {
+        int inputNumber = - 1;
+        boolean validMove = false;
 
+        while (!validMove) {
+            if (currentPlayer.getName().equals("Computer")) {
+                inputNumber = cpu.computerChoice(p1.getSymbol(), p2.getSymbol());
+                System.out.println("Computer chooses " + (inputNumber + 1));
             } else {
                 System.out.println(currentPlayer.getName() + " choose where to put your mark: ");
-                board.printBoard();
-                inputNumber = InputHandler.getInt();
+                inputNumber = InputHandler.getInt() - 1;
             }
 
-            if(!board.setMove(inputNumber - 1, currentPlayer.getSymbol())) {
-            } else{
-                    checkInput();
-                    takeTurns();
-                }
+            validMove = board.checkMove(inputNumber, currentPlayer.getSymbol());
+
             }
+
+        board.setMove(inputNumber, currentPlayer.getSymbol());
+        return inputNumber;
 
 
     }
@@ -153,12 +170,6 @@ public class Game {
         return false;
     }
 
-//    public int computerChoice() {
-//        Random rng = new Random();
-//        int computerChoice;
-//         computerChoice = rng.nextInt(board.getSize());
-//           return computerChoice;
-//    }
 
     public void takeTurns() {
         if (currentPlayer == players.get(0)) {
@@ -223,14 +234,14 @@ public class Game {
         }
 
         p1 = players.get(0);
-        if (playerNumber > 1) {
-            p2 = players.get(1);
-        } else {
+        if (playerNumber == 1) {
             p2 = new Player("Computer");
             players.add(p2);
             System.out.println("Player 2 is the " + players.get(1).getName());
+            chooseLevel();
 
-
+        } else {
+            p2 = players.get(1);
         }
 
         currentPlayer = p1;

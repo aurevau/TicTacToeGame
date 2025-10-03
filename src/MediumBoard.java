@@ -1,5 +1,5 @@
 public class MediumBoard extends GameBoard {
-    private String[] board;
+
 
     public MediumBoard() {
         createBoard();
@@ -8,6 +8,14 @@ public class MediumBoard extends GameBoard {
     @Override
     public int getSize() {
         return board.length;
+    }
+
+    @Override
+    public String getCell(int index) {
+        if (index < 0 ||index >= board.length){
+            throw new IllegalArgumentException("index out of bounds" + index);
+        }
+        return board[index];
     }
 
     @Override
@@ -28,6 +36,8 @@ public class MediumBoard extends GameBoard {
             }
         }
     }
+
+
 
     @Override
     public String checkWinner() {
@@ -58,19 +68,32 @@ public class MediumBoard extends GameBoard {
     }
 
     @Override
-    public boolean setMove(int index, String symbol) {
+    public int findWinningMove(String symbol) {
+        int[][] winPatterns = {
+                {0, 1, 2, 3}, {4, 5, 6, 7}, {8, 9, 10, 11}, {12, 13, 14, 15},
+                {0, 4, 8, 12}, {1, 5, 9, 13}, {2, 6, 10, 14}, {3, 7, 11, 15},
+                {0, 5, 10, 15}, {3, 6, 9, 12}
+        };
 
-        if (index < 0 || index >= board.length) {
-            System.out.println("Invalid input, choose a number between 1-16");
-            return false;
+        for (int[] pattern : winPatterns) {
+            int count = 0;
+            int emptyIndex = -1;
+
+            for (int i : pattern) {
+                if (board[i].equals(symbol)) {
+                    count++;
+                } else if (board[i].isEmpty() && emptyIndex == -1) {
+                    emptyIndex = i; // spara första tomma
+                }
+            }
+
+            if (count == 3 && emptyIndex != -1) {
+                return emptyIndex; // returnera vinnande ruta
+            }
         }
-        if (!board[index].isEmpty()) {
-            System.out.println("Slot is already filled, try again!");
-            return false;
-        }
-        // Sets move
-        board[index] = symbol;
-        return true;
+
+        return -1; // ingen vinnande ruta
     }
+
 }
 

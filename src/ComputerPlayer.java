@@ -1,3 +1,4 @@
 public interface ComputerPlayer {
-     int computerChoice();
+
+     int computerChoice(String mySymbol, String opponentSymbol);
 }
