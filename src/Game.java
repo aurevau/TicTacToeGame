@@ -31,7 +31,7 @@ public class Game {
         System.out.println("Welcome to Tic Tac Toe!");
         chooseGame();
         chooseOpponent();
-//        setTurns();
+        setTurns();
         getinput();
 
 
@@ -85,11 +85,13 @@ public class Game {
             if (currentPlayer.getName().equals("Computer")){
                 inputNumber = computerChoice();
                 System.out.println("Computer chooses " + (inputNumber));
+
             } else {
                 System.out.println(currentPlayer.getName() + " choose where to put your mark(1-9): ");
                 board.printBoard();
                 inputNumber = InputHandler.getInt();
             }
+            takeTurns();
 
             if (!board.setMove(inputNumber - 1, currentPlayer.getSymbol())){
                 System.out.println("Invalid input!");
@@ -105,7 +107,7 @@ public class Game {
                             board.printBoard();
                             board.createBoard();
 
-                        takeTurns();
+
 
                     } else {
                         System.out.println("Slot is filled, try again!");
@@ -121,36 +123,36 @@ public class Game {
         }
     }
 
-//    public void setTurns() {
-//
-//        while (true) {
-//            System.out.println("Player 1, choose your weapon: 'x' or 'o'");
-//            players.get(0).setTurn(InputHandler.getString());
-//            currentPlayer = players.get(0);
-//
-//
-//            if (players.get(0).getTurn().equalsIgnoreCase("X")) {
-//                players.get(0).setTurn("X");
-//                players.get(1).setTurn("O");
-//
-//                break;
-//
-//            } else if (players.get(0).getTurn().equalsIgnoreCase("O")) {
-//                players.get(0).setTurn("0");
-//                players.get(1).setTurn("X");
-//                break;
-//
-//            } else {
-//                System.out.println("Invalid choice, try again!");
-//            }
-//
-//        }
-//        opponent = players.get(1);
-//        System.out.println("These are your weapons: ");
-//        System.out.println(players.get(0).getName() + " : " + players.get(0).getTurn());
-//        System.out.println(players.get(1).getName() + ": " + players.get(1).getTurn());
-//
-//    }
+    public void setTurns() {
+
+        while (true) {
+            System.out.println("Player 1, choose your weapon: 'x' or 'o'");
+            players.get(0).setSymbol(InputHandler.getString());
+            currentPlayer = players.get(0);
+
+
+            if (players.get(0).getSymbol().equalsIgnoreCase("X")) {
+                players.get(0).setSymbol("X");
+                players.get(1).setSymbol("O");
+
+                break;
+
+            } else if (players.get(0).getSymbol().equalsIgnoreCase("O")) {
+                players.get(0).setSymbol("0");
+                players.get(1).setSymbol("X");
+                break;
+
+            } else {
+                System.out.println("Invalid choice, try again!");
+            }
+
+        }
+        opponent = players.get(1);
+        System.out.println("These are your weapons: ");
+        System.out.println(players.get(0).getName() + " : " + players.get(0).getSymbol());
+        System.out.println(players.get(1).getName() + ": " + players.get(1).getSymbol());
+
+    }
 
     public void createPlayers(int playerNumber){
         for (int i = 0; i < playerNumber; i++){
