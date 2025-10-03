@@ -9,8 +9,9 @@ public class Game {
     private Player opponent;
     List<Player> players = new ArrayList<>();
     private boolean running = true;
+    private GameBoard board;
 
-    static String[] board;
+
     public Game() {
 
 
@@ -29,8 +30,8 @@ public class Game {
 
         System.out.println("Welcome to Tic Tac Toe!");
         chooseGame();
-        setTurns();
-        createBoard();
+        chooseOpponent();
+//        setTurns();
         getinput();
 
 
@@ -38,6 +39,23 @@ public class Game {
     }
 
     public void chooseGame(){
+        System.out.println("Choose Game board size: ");
+        System.out.println("1. 3 x 3 ");
+        System.out.println("2. 4 x 4 ");
+        System.out.println("3. 5 x 5 ");
+
+        int choice = InputHandler.getInt();
+        switch(choice){
+            case 1: board = new SmallBoard();
+            break;
+//            case 2: board = new MediumBoard();
+//            break;
+//            case 3: board = new LargeBoard();
+//            break;
+        }
+    }
+
+    public void chooseOpponent(){
         System.out.println("Do you want to play against a friend or the computer?");
         System.out.println("1. Against a friend");
         System.out.println("2. Against a computer");
@@ -69,32 +87,30 @@ public class Game {
                 System.out.println("Computer chooses " + (inputNumber));
             } else {
                 System.out.println(currentPlayer.getName() + " choose where to put your mark(1-9): ");
-                printBoard();
+                board.printBoard();
                 inputNumber = InputHandler.getInt();
             }
 
-            if (inputNumber < 1 || inputNumber > 9) {
+            if (!board.setMove(inputNumber - 1, currentPlayer.getSymbol())){
                 System.out.println("Invalid input!");
 
-            }else {
-                    if (board[inputNumber - 1].equalsIgnoreCase("")) {
-                        board[inputNumber - 1] = currentPlayer.getTurn();
-                        printBoard();
-                        if(checkWinner()) {
-                            printScore();
+
+                    if (board.checkWinner().equals("Winner")) {
+                        board.printBoard();
+
                             System.out.println("Press Enter to play again!(quit to quit game)");
-                            if(InputHandler.getString().equalsIgnoreCase("quit")){
+                            if(InputHandler.getString().equalsIgnoreCase("quit")) {
                                 break;
                             }
-                            printBoard();
-                            createBoard();
-                        }
+                            board.printBoard();
+                            board.createBoard();
+
                         takeTurns();
 
                     } else {
                         System.out.println("Slot is filled, try again!");
                     }
-                }
+            }
         }
     }
     public void takeTurns(){
@@ -105,36 +121,36 @@ public class Game {
         }
     }
 
-    public void setTurns() {
-
-        while (true) {
-            System.out.println("Player 1, choose your weapon: 'x' or 'o'");
-            players.get(0).setTurn(InputHandler.getString());
-            currentPlayer = players.get(0);
-
-
-            if (players.get(0).getTurn().equalsIgnoreCase("X")) {
-                players.get(0).setTurn("X");
-                players.get(1).setTurn("O");
-
-                break;
-
-            } else if (players.get(0).getTurn().equalsIgnoreCase("O")) {
-                players.get(0).setTurn("0");
-                players.get(1).setTurn("X");
-                break;
-
-            } else {
-                System.out.println("Invalid choice, try again!");
-            }
-
-        }
-        opponent = players.get(1);
-        System.out.println("These are your weapons: ");
-        System.out.println(players.get(0).getName() + " : " + players.get(0).getTurn());
-        System.out.println(players.get(1).getName() + ": " + players.get(1).getTurn());
-
-    }
+//    public void setTurns() {
+//
+//        while (true) {
+//            System.out.println("Player 1, choose your weapon: 'x' or 'o'");
+//            players.get(0).setTurn(InputHandler.getString());
+//            currentPlayer = players.get(0);
+//
+//
+//            if (players.get(0).getTurn().equalsIgnoreCase("X")) {
+//                players.get(0).setTurn("X");
+//                players.get(1).setTurn("O");
+//
+//                break;
+//
+//            } else if (players.get(0).getTurn().equalsIgnoreCase("O")) {
+//                players.get(0).setTurn("0");
+//                players.get(1).setTurn("X");
+//                break;
+//
+//            } else {
+//                System.out.println("Invalid choice, try again!");
+//            }
+//
+//        }
+//        opponent = players.get(1);
+//        System.out.println("These are your weapons: ");
+//        System.out.println(players.get(0).getName() + " : " + players.get(0).getTurn());
+//        System.out.println(players.get(1).getName() + ": " + players.get(1).getTurn());
+//
+//    }
 
     public void createPlayers(int playerNumber){
         for (int i = 0; i < playerNumber; i++){
@@ -192,25 +208,7 @@ public class Game {
             }
         }
     }
-    public void createBoard(){
-        board = new String[9];
-        for(int i = 0; i < board.length; i++){
-            board[i] = "";
-        }
-    }
 
-
-
-
-    public void printBoard(){
-        for(int i = 0; i < board.length; i++){
-            System.out.print(" [ " + board[i] + " ] ");
-
-            if ((i + 1) % 3 == 0) {
-                System.out.println();
-            }
-        }
-    }
 
     public void printScore(){
         System.out.println(p1.getName() + " | " + p2.getName() + " | ");
@@ -219,79 +217,4 @@ public class Game {
         System.out.println("Draws  | " + p1.getDraws() + "  |  " + p2.getDraws() + " | ");
 
     }
-
-    public boolean checkWinner(){
-        if (!board[0].equals("") && board[0].equals(board[1]) && board[1].equals(board[2])) {
-            System.out.println("Winner is " + currentPlayer.getName());
-            currentPlayer.setWins(+1);
-            opponent.setLosses(+1);
-            return true;
-        }
-        if(!board[3].equals("") && board[3].equals(board[4]) && board[4].equals(board[5])) {
-            System.out.println("Winner is " + currentPlayer.getName());
-            currentPlayer.setWins(+1);
-            opponent.setLosses(+1);
-            return true;
-        }
-        if (!board[6].equals("") && board[6].equals(board[7]) && board[7].equals(board[8])) {
-            System.out.println("Winner is " + currentPlayer.getName());
-            currentPlayer.setWins(+1);
-            opponent.setLosses(+1);
-            return true;
-        }
-
-        if (!board[0].equals("") && board[0].equals(board[3]) && board[3].equals(board[6])) {
-            System.out.println("Winner is " + currentPlayer.getName());
-            currentPlayer.setWins(+1);
-            opponent.setLosses(+1);
-            return true;
-        }
-
-        if(!board[1].equals("") && board[1].equals(board[4]) && board[4].equals(board[7])) {
-            System.out.println("Winner is " + currentPlayer.getName());
-            currentPlayer.setWins(+1);
-            opponent.setLosses(+1);
-            return true;
-        }
-
-        if (!board[2].equals("") && board[2].equals(board[5]) && board[5].equals(board[8])) {
-            System.out.println("Winner is " + currentPlayer.getName());
-            currentPlayer.setWins(+1);
-            opponent.setLosses(+1);
-            return true;
-        }
-
-        if (!board[0].equals("") && board[0].equals(board[4]) && board[4].equals(board[8])) {
-            System.out.println("Winner is " + currentPlayer.getName());
-            currentPlayer.setWins(+1);
-            opponent.setLosses(+1);
-            return true;
-        }
-
-        if (!board[2].equals("") && board[2].equals(board[4]) && board[4].equals(board[6])) {
-            System.out.println("Winner is " + currentPlayer.getName());
-            currentPlayer.setWins(+1);
-            opponent.setLosses(+1);
-            return true;
-        }
-
-        boolean draw = true;
-
-        for(int i = 0; i < board.length; i++){
-            if(board[i].equals("")) {
-                draw = false;
-                break;
-            }
-
-        }
-
-        if (draw) {
-            System.out.println("It's a draw!");
-            currentPlayer.setDraws(+1);
-            opponent.setDraws(+1);
-            return true;
-        }
-        return false;
-    }
-
 }

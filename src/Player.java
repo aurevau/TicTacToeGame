@@ -4,7 +4,7 @@ public class Player {
     private int wins;
     private int losses;
     private int draws;
-    private String turn;
+    private String symbol;
 
     public int getLosses() {
         return losses;
@@ -27,12 +27,12 @@ public class Player {
     }
 
 
-    public String getTurn() {
-        return turn;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setTurn(String turn) {
-        this.turn = turn;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
 
