@@ -9,6 +9,7 @@ public class Game {
     private Player opponent;
     List<Player> players = new ArrayList<>();
     private GameBoard board;
+    private ComputerPlayer cpu;
 
 
     public Game() {
@@ -44,8 +45,8 @@ public class Game {
                 break;
             case 2: board = new MediumBoard();
             break;
-//            case 3: board = new LargeBoard();
-//            break;
+            case 3: board = new LargeBoard();
+            break;
         }
     }
 
@@ -64,6 +65,7 @@ public class Game {
                 break;
             case 2:
                 createPlayers(1);
+                chooseLevel();
                 break;
             case 3:
                 System.out.println("Welcome Back!");
@@ -72,11 +74,40 @@ public class Game {
         }
     }
 
+    public void chooseLevel(){
+
+        System.out.println("Choose level: ");
+        System.out.println("1. Easy");
+        System.out.println("2. Medium");
+        System.out.println("3. Hard");
+
+        int choice = InputHandler.getInt();
+
+        switch (choice) {
+            case 1:
+                cpu = new EasyComputer(board);
+                System.out.println("You choose easy computer");
+                break;
+//            case 2:
+//                cpu = new MediumComputer(board);
+//                System.out.println("You choose medium computer");
+//                break;
+//            case 3:
+//                cpu = new HardComputer(board);
+//                System.out.println("You choose hard computer");
+//                break;
+            default:
+                System.out.println("Invalid choice, defaulting to Easy");
+                cpu = new EasyComputer(board);
+
+        }
+    }
+
     public void getinput() {
         int inputNumber;
         while (true) {
             if (currentPlayer.getName().equals("Computer")) {
-                inputNumber = computerChoice();
+                inputNumber = cpu.computerChoice();
                 System.out.println("Computer chooses " + (inputNumber));
 
             } else {
@@ -122,12 +153,12 @@ public class Game {
         return false;
     }
 
-    public int computerChoice() {
-        Random rng = new Random();
-        int computerChoice;
-         computerChoice = rng.nextInt(board.getSize());
-           return computerChoice;
-    }
+//    public int computerChoice() {
+//        Random rng = new Random();
+//        int computerChoice;
+//         computerChoice = rng.nextInt(board.getSize());
+//           return computerChoice;
+//    }
 
     public void takeTurns() {
         if (currentPlayer == players.get(0)) {

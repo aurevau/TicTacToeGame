@@ -12,7 +12,7 @@ public class LargeBoard extends GameBoard {
 
     @Override
     public void createBoard() {
-    board = new String[26];
+    board = new String[25];
     for (int i = 0; i < board.length; i++) {
         board[i] = "";
         }
