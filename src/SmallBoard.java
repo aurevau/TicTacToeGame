@@ -27,37 +27,36 @@ public class SmallBoard extends GameBoard {
     @Override
     public String checkWinner() {
         if (!board[0].equals("") && board[0].equals(board[1]) && board[1].equals(board[2])) {
-            return "Winner winner chicken dinner";
+            return board[0];
         }
         if (!board[3].equals("") && board[3].equals(board[4]) && board[4].equals(board[5])) {
-            return "Winner winner chicken dinner";
+            return board[3];
         }
         if (!board[6].equals("") && board[6].equals(board[7]) && board[7].equals(board[8])) {
-            return "Winner winner chicken dinner";
+            return board[6];
         }
 
         if (!board[0].equals("") && board[0].equals(board[3]) && board[3].equals(board[6])) {
-            return "Winner winner chicken dinner";
+            return board[0];
         }
 
         if (!board[1].equals("") && board[1].equals(board[4]) && board[4].equals(board[7])) {
-            return "Winner winner chicken dinner";
+            return board[1];
         }
 
         if (!board[2].equals("") && board[2].equals(board[5]) && board[5].equals(board[8])) {
-            return "Winner winner chicken dinner";
+            return board[2];
         }
 
         if (!board[0].equals("") && board[0].equals(board[4]) && board[4].equals(board[8])) {
-            return "Winner winner chicken dinner";
+            return board[0];
         }
 
         if (!board[2].equals("") && board[2].equals(board[4]) && board[4].equals(board[6])) {
-            return "Winner winner chicken dinner";
+            return board[2];
         }
 
         boolean draw = true;
-
         for (int i = 0; i < board.length; i++) {
             if (board[i].equals("")) {
                 draw = false;
@@ -67,21 +66,26 @@ public class SmallBoard extends GameBoard {
         }
 
         if (draw) {
-            return "It's a draw!";
+            return "draw!";
 
         }
-        return "Winner winner chicken dinner";
+        return "";
     }
 
 
     @Override
     public boolean setMove(int index, String symbol) {
-        if (index < 0 || index >= 9)
+
+        if (index < 0 || index >= 9) {
+            System.out.println("Invalid input, choose a number between 1-9");
             return false;
-        if (board[index].isEmpty()) {
-        board[index] = symbol;
-        return true;
         }
-        return false;
+        if (!board[index].isEmpty()) {
+            System.out.println("Slot is already filled, try again!");
+            return false;
+        }
+        // Sets move
+        board[index -1] = symbol;
+        return true;
     }
 }
