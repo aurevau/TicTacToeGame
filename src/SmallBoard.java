@@ -5,6 +5,15 @@ public class SmallBoard extends GameBoard {
         createBoard();
     }
 
+    public String[] getBoard() {
+        return board;
+    }
+
+    @Override
+    public int getSize() {
+        return board.length;
+    }
+
     @Override
     public void createBoard() {
         board = new String[9];
@@ -16,8 +25,7 @@ public class SmallBoard extends GameBoard {
     @Override
     public void printBoard() {
         for (int i = 0; i < board.length; i++) {
-            System.out.print(" [ " + board[i] + " ] ");
-
+            System.out.print(" [ " + board[i] +  " ] ");
             if ((i + 1) % 3 == 0) {
                 System.out.println();
             }
@@ -76,7 +84,7 @@ public class SmallBoard extends GameBoard {
     @Override
     public boolean setMove(int index, String symbol) {
 
-        if (index < 0 || index >= 9) {
+        if (index < 0 || index >= board.length) {
             System.out.println("Invalid input, choose a number between 1-9");
             return false;
         }
@@ -85,7 +93,7 @@ public class SmallBoard extends GameBoard {
             return false;
         }
         // Sets move
-        board[index -1] = symbol;
+        board[index] = symbol;
         return true;
     }
 }

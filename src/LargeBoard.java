@@ -1,7 +1,7 @@
-public class MediumBoard extends GameBoard {
+public class LargeBoard extends GameBoard {
     private String[] board;
 
-    public MediumBoard() {
+    public LargeBoard() {
         createBoard();
     }
 
@@ -12,29 +12,30 @@ public class MediumBoard extends GameBoard {
 
     @Override
     public void createBoard() {
-        board = new String[16];
-        for (int i = 0; i < board.length; i++){
-            board[i] = "";
+    board = new String[26];
+    for (int i = 0; i < board.length; i++) {
+        board[i] = "";
         }
     }
 
     @Override
     public void printBoard() {
-        for (int i = 0; i < board.length; i++){
-            System.out.print(" [ " + board[i] + " ] ");
+    for(int i = 0; i < board.length; i++) {
+        System.out.print(" [ " + board[i] +  " ] ");
 
-            if ((i + 1) % 4 == 0) {
-                System.out.println();
-            }
+        if ((i + 1) % 5 == 0) {
+            System.out.println();
         }
+    }
     }
 
     @Override
     public String checkWinner() {
         int[][] winPatterns = {
-                {0, 1, 2, 3}, {4, 5, 6, 7}, {8, 9, 10, 11}, {12, 13, 14, 15},
-                {0, 4, 8, 12}, {1, 5, 9, 13}, {2, 6, 10, 14}, {3, 7, 11, 15},
-                {0, 5, 10, 15}, {3, 6, 9, 12}
+                {0, 1, 2, 3, 4}, {5, 6, 7, 8, 9}, {10, 11, 12, 13, 14}, {15, 16, 17, 18, 19}, {20, 21, 22, 23, 24},
+                {0, 5, 10, 15, 20}, {1, 6, 11, 16, 21}, {2, 7, 12, 17, 22}, {3, 8, 13, 18, 23}, {4, 9, 14, 19, 24},
+                {0, 6, 12, 18, 24}, {4, 8, 12, 16, 20}
+
         };
 
         for (int[] pattern : winPatterns) { // Plockar ut en pattern-rad i taget
@@ -42,7 +43,8 @@ public class MediumBoard extends GameBoard {
             if (!first.equals("") &&
                     first.equals(board[pattern[1]]) &&
                     first.equals(board[pattern[2]]) &&
-                    first.equals(board[pattern[3]])) {
+                    first.equals(board[pattern[3]]) &&
+                    first.equals(board[pattern[4]])){
                 return first;
             }
         }
@@ -59,9 +61,8 @@ public class MediumBoard extends GameBoard {
 
     @Override
     public boolean setMove(int index, String symbol) {
-
         if (index < 0 || index >= board.length) {
-            System.out.println("Invalid input, choose a number between 1-16");
+            System.out.println("Invalid input, choose a number between 1-25");
             return false;
         }
         if (!board[index].isEmpty()) {
@@ -73,4 +74,3 @@ public class MediumBoard extends GameBoard {
         return true;
     }
 }
-

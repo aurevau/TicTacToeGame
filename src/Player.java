@@ -10,16 +10,16 @@ public class Player {
         return losses;
     }
 
-    public void setLosses(int losses) {
-        this.losses = losses;
+    public void addLosses() {
+        losses++;
     }
 
     public int getDraws() {
         return draws;
     }
 
-    public void setDraws(int draws) {
-        this.draws = draws;
+    public void addDraws() {
+        draws++;
     }
 
     public Player(String name) {
@@ -48,7 +48,7 @@ public class Player {
         return wins;
     }
 
-    public void setWins(int wins) {
-        this.wins = wins;
+    public void addWins() {
+        wins++;
     }
 }

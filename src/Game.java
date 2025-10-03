@@ -42,8 +42,8 @@ public class Game {
             case 1:
                 board = new SmallBoard();
                 break;
-//            case 2: board = new MediumBoard();
-//            break;
+            case 2: board = new MediumBoard();
+            break;
 //            case 3: board = new LargeBoard();
 //            break;
         }
@@ -73,49 +73,50 @@ public class Game {
     }
 
     public void getinput() {
-
+        int inputNumber;
         while (true) {
-
-            int inputNumber;
-
             if (currentPlayer.getName().equals("Computer")) {
                 inputNumber = computerChoice();
                 System.out.println("Computer chooses " + (inputNumber));
 
             } else {
-                System.out.println(currentPlayer.getName() + " choose where to put your mark(1-9): ");
+                System.out.println(currentPlayer.getName() + " choose where to put your mark: ");
                 board.printBoard();
                 inputNumber = InputHandler.getInt();
+            }
 
-                if(!board.setMove(inputNumber, currentPlayer.getSymbol())) {
-                    System.out.println("Try again!");
+            if(!board.setMove(inputNumber - 1, currentPlayer.getSymbol())) {
+            } else{
+                    checkInput();
+                    takeTurns();
                 }
-            }takeTurns();
+            }
 
-        }
+
     }
 
     private boolean checkInput() {
             String winner = board.checkWinner();
 
-            if (!winner.equals("")) {
+            if (!winner.isEmpty()) {
                 board.printBoard();
                 if (winner.equals("draw!")){
                     System.out.println("It's a draw!");
-            } else {
-                    System.out.println("winner is " + currentPlayer.getName());
+                    currentPlayer.addDraws();
+                    opponent.addDraws();
+                    printScore();
+            } else if (winner.equalsIgnoreCase(currentPlayer.getSymbol())){
+                    System.out.println("Winner is " + currentPlayer.getName());
+                    currentPlayer.addWins();
+                    opponent.addLosses();
+                    printScore();
                 }
 
                 System.out.println("Press Enter to play again!(quit to quit game)");
                 if (InputHandler.getString().equalsIgnoreCase("quit")) {
                     return true;
                 }
-                board.printBoard();
                 board.createBoard();
-
-
-            } else {
-                System.out.println("Slot is filled, try again!");
             }
 
         return false;
@@ -123,8 +124,9 @@ public class Game {
 
     public int computerChoice() {
         Random rng = new Random();
-        int computerChoice = rng.nextInt(9) + 1;
-        return computerChoice;
+        int computerChoice;
+         computerChoice = rng.nextInt(board.getSize());
+           return computerChoice;
     }
 
     public void takeTurns() {
@@ -144,14 +146,14 @@ public class Game {
 
 
             if (players.get(0).getSymbol().equalsIgnoreCase("X")) {
-                players.get(0).setSymbol("X");
-                players.get(1).setSymbol("O");
+                players.get(0).setSymbol("x");
+                players.get(1).setSymbol("o");
 
                 break;
 
             } else if (players.get(0).getSymbol().equalsIgnoreCase("O")) {
-                players.get(0).setSymbol("0");
-                players.get(1).setSymbol("X");
+                players.get(0).setSymbol("o");
+                players.get(1).setSymbol("x");
                 break;
 
             } else {
@@ -206,9 +208,9 @@ public class Game {
 
 
     public void printScore() {
-        System.out.println(p1.getName() + " | " + p2.getName() + " | ");
+        System.out.println("    " + p1.getName() + " | " + p2.getName() + " | ");
         System.out.println("Wins   | " + p1.getWins() + "  |  " + p2.getWins() + " | ");
-        System.out.println("Losses | " + p1.getLosses() + "  | " + p2.getLosses() + "  | ");
+        System.out.println("Losses | " + p1.getLosses() + "  |  " + p2.getLosses() + " | ");
         System.out.println("Draws  | " + p1.getDraws() + "  |  " + p2.getDraws() + " | ");
 
     }
