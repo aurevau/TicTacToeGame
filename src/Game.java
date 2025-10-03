@@ -12,6 +12,8 @@ public class Game {
 
     static String[] board;
     public Game() {
+
+
         run();
 
 
@@ -74,7 +76,7 @@ public class Game {
             if (inputNumber < 1 || inputNumber > 9) {
                 System.out.println("Invalid input!");
 
-            } else {
+            }else {
                     if (board[inputNumber - 1].equalsIgnoreCase("")) {
                         board[inputNumber - 1] = currentPlayer.getTurn();
                         printBoard();
@@ -112,11 +114,13 @@ public class Game {
 
 
             if (players.get(0).getTurn().equalsIgnoreCase("X")) {
+                players.get(0).setTurn("X");
                 players.get(1).setTurn("O");
 
                 break;
 
             } else if (players.get(0).getTurn().equalsIgnoreCase("O")) {
+                players.get(0).setTurn("0");
                 players.get(1).setTurn("X");
                 break;
 
@@ -193,13 +197,14 @@ public class Game {
         for(int i = 0; i < board.length; i++){
             board[i] = "";
         }
-
-
-
     }
+
+
+
+
     public void printBoard(){
         for(int i = 0; i < board.length; i++){
-            System.out.print("[" + board[i] + "]");
+            System.out.print(" [ " + board[i] + " ] ");
 
             if ((i + 1) % 3 == 0) {
                 System.out.println();
