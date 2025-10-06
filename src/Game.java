@@ -64,6 +64,9 @@ public class Game {
             break;
             case 3: board = new LargeBoard();
             break;
+            default:
+                System.out.println("Invalid choice, try again!");
+                chooseGame();
         }
     }
 
@@ -87,6 +90,9 @@ public class Game {
                 System.out.println("Welcome Back!");
                 System.exit(0);
                 break;
+            default:
+                System.out.println("Invalid choice, try again!");
+                chooseOpponent();
         }
     }
 
@@ -108,14 +114,13 @@ public class Game {
                 cpu = new MediumComputer(board);
                 System.out.println("You choose medium computer");
                 break;
-//            case 3:
-//                cpu = new HardComputer(board);
-//                System.out.println("You choose hard computer");
-//                break;
+            case 3:
+                cpu = new HardComputer(board);
+                System.out.println("You choose hard computer");
+                break;
             default:
-                System.out.println("Invalid choice, defaulting to Easy");
-                cpu = new EasyComputer(board);
-
+                System.out.println("Invalid choice, try again!");
+                chooseLevel();
         }
     }
 

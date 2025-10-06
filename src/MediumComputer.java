@@ -19,10 +19,6 @@ public class MediumComputer implements ComputerPlayer {
                 return blockMove;
             }
 
-            int centerIndex = board.getSize() / 2;
-            if (board.getCell(centerIndex).isEmpty()) {
-                return centerIndex;
-            }
 
             int choice;
             do {

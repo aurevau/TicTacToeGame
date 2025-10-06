@@ -9,6 +9,10 @@ public class SmallBoard extends GameBoard {
         return board;
     }
 
+    public int[] getCenterCells(){
+        return new int[]{4};
+    }
+
     @Override
     public int getSize() {
         return board.length;

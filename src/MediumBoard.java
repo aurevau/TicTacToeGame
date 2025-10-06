@@ -5,6 +5,10 @@ public class MediumBoard extends GameBoard {
         createBoard();
     }
 
+    public int[] getCenterCells(){
+        return new int[]{6, 7, 10, 11};
+    }
+
     @Override
     public int getSize() {
         return board.length;

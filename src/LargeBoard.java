@@ -4,6 +4,10 @@ public class LargeBoard extends GameBoard {
         createBoard();
     }
 
+    public int []getCenterCells(){
+        return new int[]{12};
+    }
+
     @Override
     public int getSize() {
         return board.length;
