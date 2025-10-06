@@ -3,7 +3,6 @@ public class InputHandler {
 
     public static Scanner input = new Scanner(System.in);
 
-
     public static String getString(){
 
         String userInput = input.nextLine();

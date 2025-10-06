@@ -132,6 +132,7 @@ public class Game {
         while (!validMove) {
             if (currentPlayer.getName().equalsIgnoreCase("COMPUTER")) {
                 inputNumber = cpu.computerChoice(p1.getSymbol(), p2.getSymbol());
+                validMove = board.checkMove(inputNumber, currentPlayer.getSymbol());
                 System.out.println("Computer chooses: " + (inputNumber + 1));
             } else {
                 System.out.println(currentPlayer.getName() + "(" + currentPlayer.getSymbol() + "): choose where to put your mark(1-" + board.getSize() + ")" );
@@ -148,6 +149,7 @@ public class Game {
 
     }
 
+    // Check name
     private boolean checkInput() {
             String winner = board.checkWinner();
 
@@ -257,6 +259,7 @@ public class Game {
 
 
     public void printScore() {
+        System.out.println("HIGHSCHORE");
         System.out.println("    " + p1.getName() + " | " + p2.getName() + " | ");
         System.out.println("Wins   | " + p1.getWins() + "  |  " + p2.getWins() + " | ");
         System.out.println("Losses | " + p1.getLosses() + "  |  " + p2.getLosses() + " | ");
