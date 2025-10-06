@@ -132,18 +132,21 @@ public class Game {
         while (!validMove) {
             if (currentPlayer.getName().equalsIgnoreCase("COMPUTER")) {
                 inputNumber = cpu.computerChoice(p1.getSymbol(), p2.getSymbol());
-                validMove = board.checkMove(inputNumber, currentPlayer.getSymbol());
-                System.out.println("Computer chooses: " + (inputNumber + 1));
             } else {
-                System.out.println(currentPlayer.getName() + "(" + currentPlayer.getSymbol() + "): choose where to put your mark(1-" + board.getSize() + ")" );
+                System.out.println(currentPlayer.getName() + "(" + currentPlayer.getSymbol() + "): choose where to put your mark(1-" + board.getSize() + ")");
                 inputNumber = InputHandler.getInt() - 1;
             }
 
-            validMove = board.checkMove(inputNumber, currentPlayer.getSymbol());
+            if (board.checkMove(inputNumber, currentPlayer.getSymbol())) {
+                validMove = true;
+                board.setMove(inputNumber, currentPlayer.getSymbol());
 
+                if (currentPlayer.getName().equalsIgnoreCase("COMPUTER")) {
+                    System.out.println("Computer chooses: " + (inputNumber + 1));
+                }
             }
+        }
 
-        board.setMove(inputNumber, currentPlayer.getSymbol());
         return inputNumber;
 
 
