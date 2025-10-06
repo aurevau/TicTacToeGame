@@ -14,18 +14,19 @@ public class MediumComputer implements ComputerPlayer {
         if (winningMove != -1 && board.checkMove(winningMove, mySymbol)) {
             return winningMove;
         }
-            int blockMove = board.findWinningMove(opponentSymbol);
-            if (blockMove != -1 && board.checkMove(blockMove, mySymbol))  {
-                return blockMove;
-            }
+
+        int blockMove = board.findWinningMove(opponentSymbol);
+        if (blockMove != -1 && board.checkMove(blockMove, mySymbol))  {
+            return blockMove;
+        }
 
 
-            int choice;
-            do {
-                choice = rng.nextInt(board.getSize());
+        int choice;
+        do {
+            choice = rng.nextInt(board.getSize());
 
-            } while (!board.checkMove(choice, mySymbol));
-            return choice;
+        } while (!board.checkMove(choice, mySymbol));
+        return choice;
 
 
         }
