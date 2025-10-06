@@ -5,11 +5,18 @@ public class InputHandler {
 
 
     public static String getString(){
-        return input.nextLine();
+
+        String userInput = input.nextLine();
+        if (userInput.equalsIgnoreCase("quit")) {
+            System.exit(0);
+        }
+        return userInput;
     }
 
     public static String getName() {
         String name;
+
+
 
 
         boolean validLength;
@@ -17,6 +24,9 @@ public class InputHandler {
         while (true) {
             name = input.nextLine().toUpperCase();
 
+            if (name.equalsIgnoreCase("quit")) {
+                System.exit(0);
+            }
             validLength = name.length() >= 2;
             validInput = name.matches("[a-zA-Z]+");
 
