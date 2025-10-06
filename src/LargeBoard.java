@@ -85,7 +85,7 @@ public class LargeBoard extends GameBoard {
                 break;
             }
         }
-        if (draw) return "draw";
+        if (draw) return "draw!";
         return " ";
     }
 

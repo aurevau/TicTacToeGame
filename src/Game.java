@@ -132,9 +132,9 @@ public class Game {
         while (!validMove) {
             if (currentPlayer.getName().equalsIgnoreCase("COMPUTER")) {
                 inputNumber = cpu.computerChoice(p1.getSymbol(), p2.getSymbol());
-                System.out.println("Computer chooses " + (inputNumber + 1));
+                System.out.println("Computer chooses: " + (inputNumber + 1));
             } else {
-                System.out.println(currentPlayer.getName() + "(" + currentPlayer.getSymbol() + "), choose where to put your mark(1-" + board.getSize() + ")" );
+                System.out.println(currentPlayer.getName() + "(" + currentPlayer.getSymbol() + "): choose where to put your mark(1-" + board.getSize() + ")" );
                 inputNumber = InputHandler.getInt() - 1;
             }
 
@@ -189,7 +189,7 @@ public class Game {
     public void setSymbols() {
 
         while (true) {
-            System.out.println("Player 1, choose your weapon: 'x' or 'o'");
+            System.out.println(currentPlayer.getName() + ": choose your weapon: 'x' or 'o'");
             players.get(0).setSymbol(InputHandler.getString());
             currentPlayer = players.get(0);
 

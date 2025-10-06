@@ -83,7 +83,7 @@ public class MediumBoard extends GameBoard {
                 break;
             }
         }
-        if (draw) return "draw";
+        if (draw) return "draw!";
         return " ";
     }
 
