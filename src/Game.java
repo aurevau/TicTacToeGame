@@ -14,15 +14,9 @@ public class Game {
     public Game() {
         startGame();
 
-
-
-
     }
 
-
-
     public void startGame() {
-
         System.out.println("Welcome to Tic Tac Toe!");
         chooseGame();
         chooseOpponent();
@@ -34,9 +28,7 @@ public class Game {
         boolean gameOver = false;
 
         while (!gameOver){
-            board.printBoard();
-            int inputNumber = getInput();
-            board.setMove(inputNumber, currentPlayer.getSymbol());
+            getInput();
             gameOver = checkGameStatus();
 
             if (!gameOver) {
@@ -64,14 +56,15 @@ public class Game {
                 System.out.println("It's a draw!");
                 currentPlayer.addDraws();
                 opponent.addDraws();
-                printScore();
+
             } else if (winner.equalsIgnoreCase(currentPlayer.getSymbol())){
                 System.out.println("Winner is " + currentPlayer.getName());
                 currentPlayer.addWins();
                 opponent.addLosses();
-                printScore();
+
             }
 
+            printScore();
             System.out.println("Press Enter to play again!(quit to quit game)");
             if (InputHandler.getString().equalsIgnoreCase("quit")) {
                 return true;
@@ -227,7 +220,7 @@ public class Game {
         System.out.println(players.get(1).getName() + ": " + players.get(1).getSymbol());
     }
 
-    public int getInput() {
+    public void getInput() {
         int inputNumber = - 1;
         boolean validMove = false;
 
@@ -235,8 +228,10 @@ public class Game {
             if (currentPlayer.getName().equalsIgnoreCase("COMPUTER")) {
                 inputNumber = cpu.computerChoice(p1.getSymbol(), p2.getSymbol());
             } else {
+                board.printBoard();
                 System.out.println(currentPlayer.getName() + "(" + currentPlayer.getSymbol() + "): choose where to put your mark(1-" + board.getSize() + ")" );
                 inputNumber = InputHandler.getInt() - 1;
+                System.out.println(currentPlayer.getName() +  " chose: " + (inputNumber + 1));
             }
 
             if(board.checkMove(inputNumber, currentPlayer.getSymbol())){
@@ -244,12 +239,11 @@ public class Game {
                 board.setMove(inputNumber, currentPlayer.getSymbol());
 
                 if (currentPlayer.getName().equalsIgnoreCase("COMPUTER")) {
-                    System.out.println("Computer chooses: " + (inputNumber + 1));
-            }
-            }
-}
+                    System.out.println("Computer chose: " + (inputNumber + 1));
 
-        return inputNumber;
+                }
+            }
+        }
 
     }
 
