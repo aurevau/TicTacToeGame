@@ -109,7 +109,7 @@ public class SmallBoard extends GameBoard {
 
     @Override
     public void setMove(int index, String symbol) {
-            board[index] = "" + symbol +  "";
+            board[index] = symbol;
 
     }
 
@@ -126,9 +126,9 @@ public class SmallBoard extends GameBoard {
             int emptyIndex = -1;
 
             for (int i : pattern) {
-                if (board[i].equals(symbol)) {
+                if (board[i].equalsIgnoreCase(symbol)) {
                     count++;
-                } else if (board[i].isEmpty() && emptyIndex == -1) {
+                } else if (board[i].equals(" ") && emptyIndex == -1) {
                     emptyIndex = i; // spara första tomma
                 }
             }

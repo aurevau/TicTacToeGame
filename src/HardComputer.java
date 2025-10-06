@@ -14,6 +14,8 @@ public class HardComputer implements ComputerPlayer{
     @Override
     public int computerChoice(String mySymbol, String opponentSymbol) {
         int winningMove = board.findWinningMove(mySymbol);
+
+
         if (winningMove != -1 && board.checkMove(winningMove, mySymbol)) {
             return winningMove;
         }

@@ -6,7 +6,7 @@ public class MediumBoard extends GameBoard {
     }
 
     public int[] getCenterCells(){
-        return new int[]{6, 7, 10, 11};
+        return new int[]{5, 6, 9, 10};
     }
 
     @Override
@@ -37,19 +37,19 @@ public class MediumBoard extends GameBoard {
         System.out.println(line);
 
         for (int i = 0; i < board.length; i++){
-            String cell = board[i];
+//            String cell = board[i];
 
-            if(cell.equals(" ")){
-                cell = String.valueOf(i + 1);
-                int number = i + 1;
-                if (number >=10 && number <= 16){
-                   cell = String.valueOf(number);
-                } else {
-                    cell = " " + number;
-                }
-            }
+//            if(cell.equals(" ")){
+//                cell = String.valueOf(i + 1);
+//                int number = i + 1;
+//                if (number >=10 && number <= 16){
+//                   cell = String.valueOf(number);
+//                } else {
+//                    cell = " " + number;
+//                }
+
 //            System.out.print(" [ " + board[i] + " ] ");
-            System.out.print("|" + cell +  " ");
+            System.out.print("| " + board[i] + " ");
             if ((i + 1) % columns == 0) {
                 System.out.println("|");
                 System.out.println(line);
@@ -89,7 +89,7 @@ public class MediumBoard extends GameBoard {
 
     @Override
     public void setMove(int index, String symbol) {
-        board[index] = "" + symbol +   " ";
+        board[index] = symbol;
 
 
     }
@@ -107,9 +107,9 @@ public class MediumBoard extends GameBoard {
             int emptyIndex = -1;
 
             for (int i : pattern) {
-                if (board[i].equals(symbol)) {
+                if (board[i].equalsIgnoreCase(symbol)) {
                     count++;
-                } else if (board[i].isEmpty() && emptyIndex == -1) {
+                } else if (board[i].equals(" ") && emptyIndex == -1) {
                     emptyIndex = i; // spara första tomma
                 }
             }

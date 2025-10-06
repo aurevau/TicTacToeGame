@@ -36,19 +36,19 @@ public class LargeBoard extends GameBoard {
         System.out.println(line);
 
     for(int i = 0; i < board.length; i++) {
-        String cell = board[i];
-
-        if(cell.equals(" ")){
-            cell = String.valueOf(i + 1);
-            int number = i +1;
-            if (number >= 10 && number <= 25) {
-                cell = String.valueOf(number);
-            } else {
-                cell = " " + number;
-            }
-        }
-        System.out.print("|" + cell + " ");
-//        System.out.print(" [ " + board[i] +  " ] ");
+//        String cell = board[i];
+//
+//        if(cell.equals(" ")){
+//            cell = String.valueOf(i + 1);
+//            int number = i +1;
+//            if (number >= 10 && number <= 25) {
+//                cell = String.valueOf(number);
+//            } else {
+//                cell = " " + number;
+//            }
+//        }
+//        System.out.print("|" + cell + " ");
+        System.out.print("| " + board[i] +  " ");
 
         if ((i + 1) % 5 == 0) {
             System.out.println("|");
@@ -91,7 +91,7 @@ public class LargeBoard extends GameBoard {
 
     @Override
     public void setMove(int index, String symbol) {
-        board[index] = "" + symbol +  " ";
+        board[index] = symbol;
 
 
     }
@@ -109,9 +109,9 @@ public class LargeBoard extends GameBoard {
             int emptyIndex = -1;
 
             for (int i : pattern) {
-                if (board[i].equals(symbol)) {
+                if (board[i].equalsIgnoreCase(symbol)) {
                     count++;
-                } else if (board[i].isEmpty() && emptyIndex == -1) {
+                } else if (board[i].equals(" ") && emptyIndex == -1) {
                     emptyIndex = i; // spara första tomma
                 }
             }

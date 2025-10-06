@@ -16,6 +16,7 @@ public class Game {
 
 
 
+
     }
 
 
@@ -108,15 +109,15 @@ public class Game {
         switch (choice) {
             case 1:
                 cpu = new EasyComputer(board);
-                System.out.println("You choose easy computer");
+                System.out.println("You chose easy mode");
                 break;
             case 2:
                 cpu = new MediumComputer(board);
-                System.out.println("You choose medium computer");
+                System.out.println("You chose medium mode");
                 break;
             case 3:
                 cpu = new HardComputer(board);
-                System.out.println("You choose hard computer");
+                System.out.println("You chose hard mode");
                 break;
             default:
                 System.out.println("Invalid choice, try again!");
@@ -129,11 +130,11 @@ public class Game {
         boolean validMove = false;
 
         while (!validMove) {
-            if (currentPlayer.getName().equals("Computer")) {
+            if (currentPlayer.getName().equalsIgnoreCase("COMPUTER")) {
                 inputNumber = cpu.computerChoice(p1.getSymbol(), p2.getSymbol());
                 System.out.println("Computer chooses " + (inputNumber + 1));
             } else {
-                System.out.println(currentPlayer.getName() + "(" + currentPlayer.getSymbol() + "), choose where to put your mark: ");
+                System.out.println(currentPlayer.getName() + "(" + currentPlayer.getSymbol() + "), choose where to put your mark(1-" + board.getSize() + ")" );
                 inputNumber = InputHandler.getInt() - 1;
             }
 
@@ -194,14 +195,14 @@ public class Game {
 
 
             if (players.get(0).getSymbol().equalsIgnoreCase("X")) {
-                players.get(0).setSymbol("X");
-                players.get(1).setSymbol("O");
+                players.get(0).setSymbol("x");
+                players.get(1).setSymbol("o");
 
                 break;
 
             } else if (players.get(0).getSymbol().equalsIgnoreCase("O")) {
-                players.get(0).setSymbol("O");
-                players.get(1).setSymbol("X");
+                players.get(0).setSymbol("o");
+                players.get(1).setSymbol("x");
                 break;
 
             } else {
