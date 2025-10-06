@@ -194,14 +194,14 @@ public class Game {
 
 
             if (players.get(0).getSymbol().equalsIgnoreCase("X")) {
-                players.get(0).setSymbol("x");
-                players.get(1).setSymbol("o");
+                players.get(0).setSymbol("X");
+                players.get(1).setSymbol("O");
 
                 break;
 
             } else if (players.get(0).getSymbol().equalsIgnoreCase("O")) {
-                players.get(0).setSymbol("o");
-                players.get(1).setSymbol("x");
+                players.get(0).setSymbol("O");
+                players.get(1).setSymbol("X");
                 break;
 
             } else {
@@ -220,7 +220,7 @@ public class Game {
         for (int i = 0; i < playerNumber; i++) {
             while (true) {
                 System.out.println("Player " + (i + 1) + ", choose your name: ");
-                String name = InputHandler.getString();
+                String name = InputHandler.getName();
 
                 boolean duplicate = false;
                 for (Player p : players) {
@@ -241,7 +241,7 @@ public class Game {
 
         p1 = players.get(0);
         if (playerNumber == 1) {
-            p2 = new Player("Computer");
+            p2 = new Player("COMPUTER");
             players.add(p2);
             System.out.println("Player 2 is the " + players.get(1).getName());
             chooseLevel();

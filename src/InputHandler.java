@@ -8,6 +8,33 @@ public class InputHandler {
         return input.nextLine();
     }
 
+    public static String getName() {
+        String name;
+
+
+        boolean validLength;
+        boolean validInput;
+        while (true) {
+            name = input.nextLine().toUpperCase();
+
+            validLength = name.length() >= 2;
+            validInput = name.matches("[a-zA-Z]+");
+
+            if (validLength && validInput) {
+                break;
+            }
+
+            if (!validInput) {
+                System.out.println("Invalid input, name cannot contain numbers! Try again: ");
+            }
+
+           else if (!validLength) {
+                System.out.println("Invalid input, name must be longer! Try again: ");
+            }
+        }
+        return name;
+    }
+
     public static int getInt(){
         while(!input.hasNextInt()){
             System.out.println("Invalid input. Please try again with a number!");
