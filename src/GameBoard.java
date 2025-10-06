@@ -15,17 +15,14 @@ public abstract class GameBoard {
             System.out.println("Invalid input, choose a number between 1 - " + board.length);
             return false;
         }
-        if (!board[index].isEmpty()) {
+        if (!board[index].equals(" ")) {
             System.out.println("Slot is already filled, try again!");
             return false;
         } return true;
     }
 
 
-    public void setMove(int index, String symbol) {
-        board[index] = symbol;
-
-    }
+    public abstract void setMove(int index, String symbol);
 
     public abstract int findWinningMove(String symbol);
 

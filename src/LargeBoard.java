@@ -21,17 +21,34 @@ public class LargeBoard extends GameBoard {
     public void createBoard() {
     board = new String[25];
     for (int i = 0; i < board.length; i++) {
-        board[i] = "";
+        board[i] = " ";
         }
     }
 
     @Override
     public void printBoard() {
+        int columns = 5;
+        String line = "|---+---+---+---+---|";
+        System.out.println(line);
+
     for(int i = 0; i < board.length; i++) {
-        System.out.print(" [ " + board[i] +  " ] ");
+        String cell = board[i];
+
+        if(cell.equals(" ")){
+            cell = String.valueOf(i + 1);
+            int number = i +1;
+            if (number >= 10 && number <= 25) {
+                cell = String.valueOf(number);
+            } else {
+                cell = " " + number;
+            }
+        }
+        System.out.print("|" + cell + " ");
+//        System.out.print(" [ " + board[i] +  " ] ");
 
         if ((i + 1) % 5 == 0) {
-            System.out.println();
+            System.out.println("|");
+            System.out.println(line);
         }
     }
     }
@@ -49,7 +66,7 @@ public class LargeBoard extends GameBoard {
 
         for (int[] pattern : winPatterns) { // Plockar ut en pattern-rad i taget
             String first = board[pattern[0]]; // Hämtar ut vad som finns i första cellen i tictace x o eller ""
-            if (!first.equals("") &&
+            if (!first.equals(" ") &&
                     first.equals(board[pattern[1]]) &&
                     first.equals(board[pattern[2]]) &&
                     first.equals(board[pattern[3]]) &&
@@ -59,13 +76,20 @@ public class LargeBoard extends GameBoard {
         }
         boolean draw = true;
         for (String cell : board) {
-            if (cell.equals("")) {
+            if (cell.equals(" ")) {
                 draw = false;
                 break;
             }
         }
         if (draw) return "draw";
-        return "";
+        return " ";
+    }
+
+    @Override
+    public void setMove(int index, String symbol) {
+        board[index] = "" + symbol +  " ";
+
+
     }
 
     @Override

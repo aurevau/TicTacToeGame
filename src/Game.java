@@ -16,7 +16,6 @@ public class Game {
 
 
 
-
     }
 
 
@@ -129,7 +128,7 @@ public class Game {
                 inputNumber = cpu.computerChoice(p1.getSymbol(), p2.getSymbol());
                 System.out.println("Computer chooses " + (inputNumber + 1));
             } else {
-                System.out.println(currentPlayer.getName() + " choose where to put your mark: ");
+                System.out.println(currentPlayer.getName() + "(" + currentPlayer.getSymbol() + "), choose where to put your mark: ");
                 inputNumber = InputHandler.getInt() - 1;
             }
 
@@ -146,7 +145,7 @@ public class Game {
     private boolean checkInput() {
             String winner = board.checkWinner();
 
-            if (!winner.isEmpty()) {
+            if (!winner.equals(" ")) {
                 board.printBoard();
                 if (winner.equals("draw!")){
                     System.out.println("It's a draw!");
@@ -174,8 +173,10 @@ public class Game {
     public void takeTurns() {
         if (currentPlayer == players.get(0)) {
             currentPlayer = players.get(1);
+            opponent = players.get(0);
         } else if (currentPlayer == players.get(1)) {
             currentPlayer = players.get(0);
+            opponent = players.get(1);
         }
     }
 
