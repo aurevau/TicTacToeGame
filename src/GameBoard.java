@@ -91,6 +91,7 @@ public abstract class GameBoard {
     }
 
 
+
     public boolean checkMove(int index, String symbol){
 
         if (index < 0 || index >= board.length) {
@@ -98,7 +99,6 @@ public abstract class GameBoard {
             return false;
         }
         if (!board[index].equals(" ")) {
-            System.out.println("Slot is already filled, try again!");
             return false;
         } return true;
     }

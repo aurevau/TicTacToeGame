@@ -78,6 +78,7 @@ public class Game {
             if (InputHandler.getString().equalsIgnoreCase("quit")) {
                 return true;
             }
+            System.out.println(currentPlayer.getName() + " starts");
             board.createBoard();
         }
         return false;
@@ -245,19 +246,11 @@ public class Game {
         while (!validMove) {
 
             if (currentPlayer.getName().equalsIgnoreCase("COMPUTER")) {
-                int moveIndex = cpu.computerChoice(currentPlayer.getSymbol(), opponent.getSymbol());
-
-                if (moveIndex == board.findWinningMove(currentPlayer.getSymbol())) {
-                    System.out.println("Computer: Oh I Found a winning move!");
-                } else if (moveIndex == board.findWinningMove(opponent.getSymbol())) {
-                    System.out.println("Computer: BLOCK!");
-                }
-
-                board.setMove(moveIndex, currentPlayer.getSymbol());
+                inputNumber = cpu.computerChoice(currentPlayer.getSymbol(), opponent.getSymbol());
 
                 validMove = true;
-                System.out.println("Computer chose: " + (moveIndex + 1));
-
+                board.setMove(inputNumber, currentPlayer.getSymbol());
+                System.out.println("Computer chose: " + (inputNumber + 1));
 
             } else {
                 if (firstMove) {
@@ -272,8 +265,8 @@ public class Game {
                 if (board.checkMove(inputNumber, currentPlayer.getSymbol())) {
                     board.setMove(inputNumber, currentPlayer.getSymbol());
                     validMove = true;
-
-
+                } else {
+                    System.out.println("SLot is already filled, try again!");
                 }
 
             }

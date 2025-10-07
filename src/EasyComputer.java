@@ -11,7 +11,9 @@ public class EasyComputer implements ComputerPlayer {
     @Override
     public int computerChoice(String symbol, String opponentSymbol) {
         int choice;
-        choice = rng.nextInt(board.getSize());
+        do {
+            choice = rng.nextInt(board.getSize());
+        } while (!board.checkMove(choice, symbol));
         return choice;
     }
 

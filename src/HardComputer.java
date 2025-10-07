@@ -15,12 +15,14 @@ public class HardComputer implements ComputerPlayer{
         int winningMove = board.findWinningMove(mySymbol);
 
         if (winningMove != -1 && board.checkMove(winningMove, mySymbol)) {
+            System.out.println("Computer: Oh I found a winning move!");
             return winningMove;
         }
 
 
         int blockMove = board.findWinningMove(opponentSymbol);
         if (blockMove != -1 && board.checkMove(blockMove, mySymbol)) {
+            System.out.println("Computer: BLOCK!");
             return blockMove;
         }
 
