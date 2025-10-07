@@ -50,9 +50,14 @@ public class InputHandler {
             input.nextLine();
         }
 
+
+
         // Declare variable to be able to clear the scanner to not end up in a forever-loop
         int result = input.nextInt();
         input.nextLine();
+        if (result == -1){
+            System.exit(0);
+        }
         return result;
     }
 }

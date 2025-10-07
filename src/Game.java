@@ -17,6 +17,7 @@ public class Game {
 
 
 
+
     }
 
     public static void clearScreen(){
@@ -93,10 +94,16 @@ public class Game {
             switch (choice) {
                 case 1:
                     board = new SmallBoard();
+                    System.out.println(board.getRules());
+                    InputHandler.getString();
                     return;
                 case 2: board = new MediumBoard();
+                    System.out.println(board.getRules());
+                    InputHandler.getString();
                     return;
                 case 3: board = new LargeBoard();
+                    System.out.println(board.getRules());
+                    InputHandler.getString();
                     return;
                 default:
                     System.out.println("Invalid choice, try again!");
@@ -228,45 +235,51 @@ public class Game {
         System.out.println(players.get(1).getName() + ": " + players.get(1).getSymbol());
     }
 
+
     public void getInput() {
-        int inputNumber = - 1;
+        int inputNumber;
         boolean validMove = false;
+        boolean firstMove = true;
+
+
 
         while (!validMove) {
             if (currentPlayer.getName().equalsIgnoreCase("COMPUTER")) {
                 inputNumber = cpu.computerChoice(p1.getSymbol(), p2.getSymbol());
 
 
+
             } else {
-                board.printAnotherBoard();
-                System.out.println(currentPlayer.getName() + "(" + currentPlayer.getSymbol() + "): choose where to put your mark(1-" + board.getSize() + ")" );
-                inputNumber = InputHandler.getInt() - 1;
-                System.out.println(currentPlayer.getName() +  " chose: " + (inputNumber + 1));
-            }
 
-            if(board.checkMove(inputNumber, currentPlayer.getSymbol())){
-                validMove = true;
-                board.setMove(inputNumber, currentPlayer.getSymbol());
-
-                if (currentPlayer.getName().equalsIgnoreCase("COMPUTER")) {
+                if (firstMove) {
                     board.printAnotherBoard();
-                    System.out.println("Computer chose: " + (inputNumber + 1));
+                    System.out.println(currentPlayer.getName() + "(" + currentPlayer.getSymbol() + "): choose where to put your mark(1-" + board.getSize() + ")");
+                    firstMove = false;
+                }
 
-                    try {
-                        Thread.sleep(1500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+
+                inputNumber = InputHandler.getInt() - 1;
+
+            }
+                if (board.checkMove(inputNumber, currentPlayer.getSymbol())) {
+                    board.setMove(inputNumber, currentPlayer.getSymbol());
+                    validMove = true;
+
+                    if (currentPlayer.getName().equalsIgnoreCase("COMPUTER")) {
+                        System.out.println(currentPlayer.getName() + " chose: " + (inputNumber + 1));
                     }
 
+
                 }
+
             }
+
         }
 
-    }
 
     public void printScore() {
-        System.out.println("HIGHSCHORE");
-        System.out.println("    " + p1.getName() + " | " + p2.getName() + " | ");
+        System.out.println("        HIGHSCHORE");
+        System.out.println("    " + p1.getName() + " | " + p2.getName() + " ");
         System.out.println("Wins   | " + p1.getWins() + "  |  " + p2.getWins() + " | ");
         System.out.println("Losses | " + p1.getLosses() + "  |  " + p2.getLosses() + " | ");
         System.out.println("Draws  | " + p1.getDraws() + "  |  " + p2.getDraws() + " | ");

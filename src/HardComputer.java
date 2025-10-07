@@ -13,6 +13,7 @@ public class HardComputer implements ComputerPlayer{
 
     @Override
     public int computerChoice(String mySymbol, String opponentSymbol) {
+
         int winningMove = board.findWinningMove(mySymbol);
 
 

@@ -7,12 +7,21 @@ public abstract class GameBoard {
     public abstract void printBoard();
     public abstract String getLine();
     public abstract int getColumns();
-
     public abstract String checkWinner();
+    public abstract void setMove(int index, String symbol);
+    public abstract int findWinningMove(String symbol);
+    public abstract int[] getCenterCells();
+
+    public String getRules(){
+        return " RULES" +
+                "\n - To win this game, you have to get " + getColumns() + " symbols in a row; diagonal, horizontal or vertical." +
+                "\n - You and your opponent take turns placing your symbols" +
+                "\n - You can quit the game by writing 'quit' or -1" +
+                "\n Press Enter to continue";
+    }
 
 
     public void printAnotherBoard(){
-        Game.clearScreen();
         System.out.println(getLine());
         for (int i = 0; i < board.length; i++){
 
@@ -24,9 +33,6 @@ public abstract class GameBoard {
             } else {
                 // X eller O får också 2 tecken, så att brädet blir jämnt
                 cell = String.format(" %s", cell);
-
-
-
             }
 
             System.out.print("| " + cell + " ");
@@ -39,8 +45,8 @@ public abstract class GameBoard {
     }
 
 
-
     public boolean checkMove(int index, String symbol){
+
         if (index < 0 || index >= board.length) {
             System.out.println("Invalid input, choose a number between 1 - " + board.length);
             return false;
@@ -52,9 +58,5 @@ public abstract class GameBoard {
     }
 
 
-    public abstract void setMove(int index, String symbol);
 
-    public abstract int findWinningMove(String symbol);
-
-    public abstract int[] getCenterCells();
 }

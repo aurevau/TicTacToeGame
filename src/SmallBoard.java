@@ -12,6 +12,7 @@ public class SmallBoard extends GameBoard {
         return 3;
     }
 
+
     public String[] getBoard() {
         return board;
     }

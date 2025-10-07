@@ -8,6 +8,7 @@ public class LargeBoard extends GameBoard {
         return 5;
     }
 
+
     public String getLine(){
         return "|----+----+----+----+----|";
     }
