@@ -242,38 +242,36 @@ public class Game {
         boolean firstMove = true;
 
 
-
         while (!validMove) {
+
             if (currentPlayer.getName().equalsIgnoreCase("COMPUTER")) {
-                inputNumber = cpu.computerChoice(p1.getSymbol(), p2.getSymbol());
-                inputNumber = cpu.computerChoice(p1.getSymbol(), p2.getSymbol());
+                int moveIndex = cpu.computerChoice(currentPlayer.getSymbol(), opponent.getSymbol());
 
+                if (moveIndex == board.findWinningMove(currentPlayer.getSymbol())) {
+                    System.out.println("Computer: Oh I Found a winning move!");
+                } else if (moveIndex == board.findWinningMove(opponent.getSymbol())) {
+                    System.out.println("Computer: BLOCK!");
+                }
 
+                board.setMove(moveIndex, currentPlayer.getSymbol());
+
+                validMove = true;
+                System.out.println("Computer chose: " + (moveIndex + 1));
 
 
             } else {
-
                 if (firstMove) {
                     board.printAnotherBoard();
                     System.out.println(currentPlayer.getName() + "(" + currentPlayer.getSymbol() + "): choose where to put your mark(1-" + board.getSize() + ")");
                     firstMove = false;
                 }
 
-
                 inputNumber = InputHandler.getInt() - 1;
 
-            }
+
                 if (board.checkMove(inputNumber, currentPlayer.getSymbol())) {
                     board.setMove(inputNumber, currentPlayer.getSymbol());
                     validMove = true;
-
-                    if (currentPlayer.getName().equalsIgnoreCase("COMPUTER")) {
-                        if(cpu.lastMoveWasBlock()){
-                            System.out.println(currentPlayer.getName() + " chose: " + (inputNumber + 1) + " to block your move!");
-                        } else {
-                            System.out.println(currentPlayer.getName() + " chose: " + (inputNumber + 1));
-                        }
-                    }
 
 
                 }
@@ -281,7 +279,7 @@ public class Game {
             }
 
         }
-
+    }
 
     public void printScore() {
         System.out.println("        HIGHSCHORE");

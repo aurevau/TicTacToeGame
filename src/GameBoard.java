@@ -47,8 +47,6 @@ public abstract class GameBoard {
         return "draw!";
     }
 
-
-
     public int findWinningMove(String symbol){
         for (int [] pattern : getWinningPatterns()) {
             int count = 0;
@@ -61,12 +59,10 @@ public abstract class GameBoard {
                     emptyIndex = i;
                 }
             } // Försök vinna om möjligt
-            if (count == getColumns() && emptyIndex != -1) {
+            if (count == getColumns() - 1 && emptyIndex != -1) {
                 return emptyIndex;
             }
         }
-
-
         return -1;
     }
 

@@ -5,7 +5,6 @@ import java.util.Random;
 public class HardComputer implements ComputerPlayer{
     private Random rng = new Random();
     private GameBoard board;
-    private boolean lastMoveWasBlock = false;
     public HardComputer(GameBoard board) {
         this.board = board;
     }
@@ -16,46 +15,34 @@ public class HardComputer implements ComputerPlayer{
         int winningMove = board.findWinningMove(mySymbol);
 
         if (winningMove != -1 && board.checkMove(winningMove, mySymbol)) {
-            lastMoveWasBlock = false;
             return winningMove;
         }
 
 
         int blockMove = board.findWinningMove(opponentSymbol);
-        System.out.println("blockmove: " + blockMove);
-        if (blockMove != -1 && board.checkMove(blockMove, mySymbol))  {
-            lastMoveWasBlock = true;
+        if (blockMove != -1 && board.checkMove(blockMove, mySymbol)) {
             return blockMove;
         }
 
-        lastMoveWasBlock = false;
-        int [] centerCells = board.getCenterCells();
+        int[] centerCells = board.getCenterCells();
         List<Integer> availableMoves = new ArrayList<>();
-        for ( int index : centerCells){
-            if (board.getCell(index).equals(" ")) {
+        for (int index : centerCells) {
+            if (board.checkMove(index, mySymbol)) {
                 availableMoves.add(index);
             }
         }
 
-        int choice;
+
         if (!availableMoves.isEmpty()) {
-            choice = availableMoves.get(rng.nextInt(availableMoves.size()));
-            return choice;
+            return availableMoves.get(rng.nextInt(availableMoves.size()));
 
         }
 
+        int choice;
         do {
-            choice = rng.nextInt(board.getSize());
-
+            choice  = rng.nextInt(board.getSize());
         } while (!board.checkMove(choice, mySymbol));
         return choice;
 
-
-    }
-
-    @Override
-    public boolean lastMoveWasBlock() {
-        return lastMoveWasBlock;
-    }
-
+}
 }

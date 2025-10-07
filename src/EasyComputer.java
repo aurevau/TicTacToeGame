@@ -15,10 +15,4 @@ public class EasyComputer implements ComputerPlayer {
         return choice;
     }
 
-    @Override
-    public boolean lastMoveWasBlock() {
-        return false;
-    }
-
-
 }

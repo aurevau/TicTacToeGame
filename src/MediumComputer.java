@@ -31,8 +31,4 @@ public class MediumComputer implements ComputerPlayer {
 
         }
 
-    @Override
-    public boolean lastMoveWasBlock() {
-        return false;
-    }
 }
