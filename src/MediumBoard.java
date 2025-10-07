@@ -5,6 +5,14 @@ public class MediumBoard extends GameBoard {
         createBoard();
     }
 
+    public String getLine(){
+        return "|----+----+----+----|";
+    }
+
+    public int getColumns(){
+        return 4;
+    }
+
     public int[] getCenterCells(){
         return new int[]{5, 6, 9, 10};
     }

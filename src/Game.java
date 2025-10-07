@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,13 @@ public class Game {
     public Game() {
         startGame();
 
+
+
+    }
+
+    public static void clearScreen(){
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
     public void startGame() {
@@ -51,7 +59,7 @@ public class Game {
         String winner = board.checkWinner();
 
         if (!winner.equals(" ")) {
-            board.printBoard();
+            board.printAnotherBoard();
             if (winner.equals("draw!")){
                 System.out.println("It's a draw!");
                 currentPlayer.addDraws();
@@ -227,8 +235,10 @@ public class Game {
         while (!validMove) {
             if (currentPlayer.getName().equalsIgnoreCase("COMPUTER")) {
                 inputNumber = cpu.computerChoice(p1.getSymbol(), p2.getSymbol());
+
+
             } else {
-                board.printBoard();
+                board.printAnotherBoard();
                 System.out.println(currentPlayer.getName() + "(" + currentPlayer.getSymbol() + "): choose where to put your mark(1-" + board.getSize() + ")" );
                 inputNumber = InputHandler.getInt() - 1;
                 System.out.println(currentPlayer.getName() +  " chose: " + (inputNumber + 1));
@@ -239,7 +249,14 @@ public class Game {
                 board.setMove(inputNumber, currentPlayer.getSymbol());
 
                 if (currentPlayer.getName().equalsIgnoreCase("COMPUTER")) {
+                    board.printAnotherBoard();
                     System.out.println("Computer chose: " + (inputNumber + 1));
+
+                    try {
+                        Thread.sleep(1500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
 
                 }
             }

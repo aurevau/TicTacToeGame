@@ -4,6 +4,14 @@ public class LargeBoard extends GameBoard {
         createBoard();
     }
 
+    public int getColumns(){
+        return 5;
+    }
+
+    public String getLine(){
+        return "|----+----+----+----+----|";
+    }
+
     public int []getCenterCells(){
         return new int[]{12};
     }

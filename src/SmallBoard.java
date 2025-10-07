@@ -5,6 +5,13 @@ public class SmallBoard extends GameBoard {
         createBoard();
     }
 
+    public String getLine(){
+        return "|----+----+----|";
+    }
+    public int getColumns(){
+        return 3;
+    }
+
     public String[] getBoard() {
         return board;
     }
