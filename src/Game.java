@@ -74,7 +74,7 @@ public class Game {
             }
 
             printScore();
-            System.out.println("Press Enter to play again!(quit to quit game)");
+            System.out.println("Press Enter to play again!('quit' to quit game)");
             if (InputHandler.getString().equalsIgnoreCase("quit")) {
                 return true;
             }
@@ -246,6 +246,8 @@ public class Game {
         while (!validMove) {
             if (currentPlayer.getName().equalsIgnoreCase("COMPUTER")) {
                 inputNumber = cpu.computerChoice(p1.getSymbol(), p2.getSymbol());
+                inputNumber = cpu.computerChoice(p1.getSymbol(), p2.getSymbol());
+
 
 
 
@@ -266,7 +268,11 @@ public class Game {
                     validMove = true;
 
                     if (currentPlayer.getName().equalsIgnoreCase("COMPUTER")) {
-                        System.out.println(currentPlayer.getName() + " chose: " + (inputNumber + 1));
+                        if(cpu.lastMoveWasBlock()){
+                            System.out.println(currentPlayer.getName() + " chose: " + (inputNumber + 1) + " to block your move!");
+                        } else {
+                            System.out.println(currentPlayer.getName() + " chose: " + (inputNumber + 1));
+                        }
                     }
 
 

@@ -15,10 +15,10 @@ public class MediumComputer implements ComputerPlayer {
             return winningMove;
         }
 
-        int blockMove = board.findWinningMove(opponentSymbol);
-        if (blockMove != -1 && board.checkMove(blockMove, mySymbol))  {
-            return blockMove;
-        }
+//        int blockMove = board.findWinningMove(opponentSymbol);
+//        if (blockMove != -1 && board.checkMove(blockMove, mySymbol))  {
+//            return blockMove;
+//        }
 
 
         int choice;
@@ -30,4 +30,9 @@ public class MediumComputer implements ComputerPlayer {
 
 
         }
+
+    @Override
+    public boolean lastMoveWasBlock() {
+        return false;
     }
+}

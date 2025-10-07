@@ -4,13 +4,13 @@ public abstract class GameBoard {
     public abstract int getSize();
     public abstract String getCell(int index);
     public abstract void createBoard();
-    public abstract void printBoard();
     public abstract String getLine();
     public abstract int getColumns();
-    public abstract String checkWinner();
+//    public abstract String checkWinner();
     public abstract void setMove(int index, String symbol);
-    public abstract int findWinningMove(String symbol);
+//    public abstract int findWinningMove(String symbol);
     public abstract int[] getCenterCells();
+    public abstract int[][] getWinningPatterns();
 
     public String getRules(){
         return " RULES" +
@@ -18,6 +18,56 @@ public abstract class GameBoard {
                 "\n - You and your opponent take turns placing your symbols" +
                 "\n - You can quit the game by writing 'quit' or -1" +
                 "\n Press Enter to continue";
+    }
+
+    public String checkWinner(){
+        int[][] winPatterns = getWinningPatterns();
+
+        for (int[] pattern : winPatterns){
+            String first = board[pattern[0]];
+            if (!first.equals(" ")){
+                boolean allMatch = true;
+                for (int i = 1; i < pattern.length; i++){
+                    if (!board[pattern[i]].equals(first)){
+                        allMatch = false;
+                        break;
+                    }
+                }
+                if (allMatch){
+                    return first;
+                }
+            }
+        }
+
+        for (String cell : board) {
+            if (cell.equals(" ")){
+                return " ";
+            }
+        }
+        return "draw!";
+    }
+
+
+
+    public int findWinningMove(String symbol){
+        for (int [] pattern : getWinningPatterns()) {
+            int count = 0;
+            int emptyIndex = -1;
+
+            for (int i : pattern) {
+                if (board[i].equalsIgnoreCase(symbol)) {
+                    count++;
+                } else if (board[i].equals(" ") && emptyIndex == -1) {
+                    emptyIndex = i;
+                }
+            } // Försök vinna om möjligt
+            if (count == getColumns() && emptyIndex != -1) {
+                return emptyIndex;
+            }
+        }
+
+
+        return -1;
     }
 
 
