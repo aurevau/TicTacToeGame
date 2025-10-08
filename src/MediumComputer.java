@@ -11,7 +11,7 @@ public class MediumComputer implements ComputerPlayer {
     @Override
     public int computerChoice(String mySymbol, String opponentSymbol) {
         int winningMove = board.findWinningMove(mySymbol);
-        if (winningMove != -1 && board.checkMove(winningMove, mySymbol)) {
+        if (winningMove != -1) {
             return winningMove;
         }
 
@@ -22,10 +22,7 @@ public class MediumComputer implements ComputerPlayer {
 
 
         int choice;
-        do {
-            choice = rng.nextInt(board.getSize());
-
-        } while (!board.checkMove(choice, mySymbol));
+        choice = rng.nextInt(board.getSize());
         return choice;
 
 

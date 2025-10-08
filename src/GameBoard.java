@@ -92,16 +92,17 @@ public abstract class GameBoard {
 
 
 
-    public boolean checkMove(int index, String symbol){
-
-        if (index < 0 || index >= board.length) {
-            System.out.println("Invalid input, choose a number between 1 - " + board.length);
-            return false;
-        }
-        if (!board[index].equals(" ")) {
-            return false;
-        } return true;
-    }
+//    public boolean checkMove(int index, String symbol){
+//
+//        if (index < 0 || index >= board.length) {
+//            System.out.println("Invalid input, choose a number between 1 - " + board.length);
+//            return false;
+//        }
+//        if (!board[index].equals(" ")) {
+//            System.out.println("Slot is already filled, try again!");
+//            return false;
+//        } return true;
+//    }
 
 
 

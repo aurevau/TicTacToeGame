@@ -14,14 +14,14 @@ public class HardComputer implements ComputerPlayer{
     public int computerChoice(String mySymbol, String opponentSymbol) {
         int winningMove = board.findWinningMove(mySymbol);
 
-        if (winningMove != -1 && board.checkMove(winningMove, mySymbol)) {
+        if (winningMove != -1) {
             System.out.println("Computer: Oh I found a winning move!");
             return winningMove;
         }
 
 
         int blockMove = board.findWinningMove(opponentSymbol);
-        if (blockMove != -1 && board.checkMove(blockMove, mySymbol)) {
+        if (blockMove != -1) {
             System.out.println("Computer: BLOCK!");
             return blockMove;
         }
@@ -29,9 +29,8 @@ public class HardComputer implements ComputerPlayer{
         int[] centerCells = board.getCenterCells();
         List<Integer> availableMoves = new ArrayList<>();
         for (int index : centerCells) {
-            if (board.checkMove(index, mySymbol)) {
                 availableMoves.add(index);
-            }
+
         }
 
 
@@ -41,9 +40,7 @@ public class HardComputer implements ComputerPlayer{
         }
 
         int choice;
-        do {
-            choice  = rng.nextInt(board.getSize());
-        } while (!board.checkMove(choice, mySymbol));
+        choice  = rng.nextInt(board.getSize());
         return choice;
 
 }
