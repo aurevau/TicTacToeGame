@@ -37,13 +37,12 @@ public class Game {
 
         while (!gameOver){
             getInput();
-            takeTurns();
             gameOver = checkGameStatus();
 
-//            if (!gameOver) {
-//                takeTurns();
-//
-//            }
+            if (!gameOver) {
+                takeTurns();
+
+            }
         }
 
     }
