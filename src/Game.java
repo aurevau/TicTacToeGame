@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,12 +37,15 @@ public class Game {
 
         while (!gameOver){
             getInput();
+            takeTurns();
             gameOver = checkGameStatus();
 
-            if (!gameOver) {
-                takeTurns();
-            }
+//            if (!gameOver) {
+//                takeTurns();
+//
+//            }
         }
+
     }
 
     public void takeTurns() {
@@ -78,7 +80,7 @@ public class Game {
             if (InputHandler.getString().equalsIgnoreCase("quit")) {
                 return true;
             }
-            System.out.println(currentPlayer.getName() + " starts");
+
             board.createBoard();
         }
         return false;
@@ -204,6 +206,7 @@ public class Game {
 
         currentPlayer = p1;
         opponent = p2;
+
     }
 
     public void setSymbols() {
@@ -244,7 +247,7 @@ public class Game {
 
 
         while (!validMove) {
-
+            board.setCurrentPlayer(currentPlayer);
             if (currentPlayer.getName().equalsIgnoreCase("COMPUTER")) {
                 inputNumber = cpu.computerChoice(currentPlayer.getSymbol(), opponent.getSymbol());
 
@@ -262,7 +265,7 @@ public class Game {
                 inputNumber = InputHandler.getInt() - 1;
 
 
-                if (checkValidMove(inputNumber, currentPlayer.getSymbol())) {
+                if (board.checkMove(inputNumber, currentPlayer.getSymbol())) {
                     board.setMove(inputNumber, currentPlayer.getSymbol());
                     validMove = true;
                 } else {
@@ -274,24 +277,24 @@ public class Game {
         }
     }
 
-    public boolean checkValidMove(int index, String symbol) {
-
-        if (!currentPlayer.getName().equalsIgnoreCase("COMPUTER")) {
-            if (index < 0 || index >= board.getSize()) {
-                System.out.println("Invalid input, choose a number between 1 - " + board.getSize());
-                return false;
-            }
-            if (!board.getCell(index).equals(" ")) {
-                System.out.println("Slot is already filled, try again!");
-                return false;
-            }
-        } else {
-            if (!board.getCell(index).equals(" ")) {
-                System.out.println("Computer try again!");
-                return false;
-            }
-        } return true;
-    }
+//    public boolean checkValidMove(int index, String symbol, Player currentPlayer) {
+//
+//        if (!this.currentPlayer.getName().equalsIgnoreCase("COMPUTER")) {
+//            if (index < 0 || index >= board.getSize()) {
+//                System.out.println("Invalid input, choose a number between 1 - " + board.getSize());
+//                return false;
+//            }
+//            if (!board.getCell(index).equals(" ")) {
+//                System.out.println("Slot is already filled, try again!");
+//                return false;
+//            }
+//        } else {
+//            if (!board.getCell(index).equals(" ")) {
+//                System.out.println("Computer try again!");
+//                return false;
+//            }
+//        } return true;
+//    }
 
     public void printScore() {
         System.out.println("        HIGHSCHORE");
