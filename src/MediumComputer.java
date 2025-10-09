@@ -15,12 +15,6 @@ public class MediumComputer implements ComputerPlayer {
             return winningMove;
         }
 
-//        int blockMove = board.findWinningMove(opponentSymbol);
-//        if (blockMove != -1 && board.checkMove(blockMove, mySymbol))  {
-//            return blockMove;
-//        }
-
-
         int choice;
         do {
             choice = rng.nextInt(board.getSize());
@@ -29,6 +23,6 @@ public class MediumComputer implements ComputerPlayer {
         return choice;
 
 
-        }
+    }
 
 }

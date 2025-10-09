@@ -28,7 +28,6 @@ public class Player {
     }
 
 
-
     public String getSymbol() {
         return symbol;
     }

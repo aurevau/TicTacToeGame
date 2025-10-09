@@ -15,11 +15,9 @@ public class Game {
         startGame();
 
 
-
-
     }
 
-    public static void clearScreen(){
+    public static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
@@ -32,10 +30,10 @@ public class Game {
         gameLoop();
     }
 
-    public void gameLoop(){
+    public void gameLoop() {
         boolean gameOver = false;
 
-        while (!gameOver){
+        while (!gameOver) {
             getInput();
             gameOver = checkGameStatus();
 
@@ -62,12 +60,12 @@ public class Game {
 
         if (!winner.equals(" ")) {
             board.printAnotherBoard();
-            if (winner.equals("draw!")){
+            if (winner.equals("draw!")) {
                 System.out.println("It's a draw!");
                 currentPlayer.addDraws();
                 opponent.addDraws();
 
-            } else if (winner.equalsIgnoreCase(currentPlayer.getSymbol())){
+            } else if (winner.equalsIgnoreCase(currentPlayer.getSymbol())) {
                 System.out.println("Winner is " + currentPlayer.getName());
                 currentPlayer.addWins();
                 opponent.addLosses();
@@ -86,7 +84,7 @@ public class Game {
     }
 
     public void chooseGame() {
-        while(true){
+        while (true) {
             System.out.println("Choose Game board size: ");
             System.out.println("1. 3 x 3 ");
             System.out.println("2. 4 x 4 ");
@@ -99,11 +97,13 @@ public class Game {
                     System.out.println(board.getRules());
                     InputHandler.getString();
                     return;
-                case 2: board = new MediumBoard();
+                case 2:
+                    board = new MediumBoard();
                     System.out.println(board.getRules());
                     InputHandler.getString();
                     return;
-                case 3: board = new LargeBoard();
+                case 3:
+                    board = new LargeBoard();
                     System.out.println(board.getRules());
                     InputHandler.getString();
                     return;
@@ -114,7 +114,7 @@ public class Game {
     }
 
     public void chooseOpponent() {
-        while (true){
+        while (true) {
             System.out.println("Do you want to play against a friend or the computer?");
             System.out.println("1. Against a friend");
             System.out.println("2. Against a computer");
@@ -140,8 +140,8 @@ public class Game {
         }
     }
 
-    public void chooseLevel(){
-        while(true){
+    public void chooseLevel() {
+        while (true) {
             System.out.println("Choose level: ");
             System.out.println("1. Easy");
             System.out.println("2. Medium");
@@ -217,13 +217,13 @@ public class Game {
 
 
             if (players.get(0).getSymbol().equalsIgnoreCase("X")) {
-                players.get(0).setSymbol("x");
+//                players.get(0).setSymbol("x");
                 players.get(1).setSymbol("o");
 
                 break;
 
             } else if (players.get(0).getSymbol().equalsIgnoreCase("O")) {
-                players.get(0).setSymbol("o");
+//                players.get(0).setSymbol("o");
                 players.get(1).setSymbol("x");
                 break;
 

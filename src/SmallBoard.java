@@ -6,24 +6,23 @@ public class SmallBoard extends GameBoard {
     };
 
 
-
     public SmallBoard() {
         createBoard();
     }
 
-    public String getLine(){
+    public String getLine() {
         return "|----+----+----|";
     }
-    public int getColumns(){
+
+    public int getColumns() {
         return 3;
     }
-
 
     public String[] getBoard() {
         return board;
     }
 
-    public int[] getCenterCells(){
+    public int[] getCenterCells() {
         return new int[]{4};
     }
 
@@ -39,7 +38,7 @@ public class SmallBoard extends GameBoard {
 
     @Override
     public String getCell(int index) {
-        if (index < 0 ||index >= board.length){
+        if (index < 0 || index >= board.length) {
             throw new IllegalArgumentException("index out of bounds" + index);
         }
         return board[index];
@@ -53,13 +52,9 @@ public class SmallBoard extends GameBoard {
         }
     }
 
-
     @Override
     public void setMove(int index, String symbol) {
-            board[index] = symbol;
+        board[index] = symbol;
 
     }
-
-
-
 }

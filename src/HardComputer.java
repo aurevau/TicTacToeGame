@@ -2,9 +2,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class HardComputer implements ComputerPlayer{
+public class HardComputer implements ComputerPlayer {
     private Random rng = new Random();
     private GameBoard board;
+
     public HardComputer(GameBoard board) {
         this.board = board;
     }
@@ -41,9 +42,9 @@ public class HardComputer implements ComputerPlayer{
 
         int choice;
         do {
-            choice  = rng.nextInt(board.getSize());
+            choice = rng.nextInt(board.getSize());
         } while (!board.checkMove(choice, mySymbol));
         return choice;
 
-}
+    }
 }

@@ -5,20 +5,21 @@ public class LargeBoard extends GameBoard {
             {0, 6, 12, 18, 24}, {4, 8, 12, 16, 20}
 
     };
+
     public LargeBoard() {
         createBoard();
     }
 
-    public int getColumns(){
+    public int getColumns() {
         return 5;
     }
 
 
-    public String getLine(){
+    public String getLine() {
         return "|----+----+----+----+----|";
     }
 
-    public int []getCenterCells(){
+    public int[] getCenterCells() {
         return new int[]{12};
     }
 
@@ -34,7 +35,7 @@ public class LargeBoard extends GameBoard {
 
     @Override
     public String getCell(int index) {
-        if (index < 0 ||index >= board.length){
+        if (index < 0 || index >= board.length) {
             throw new IllegalArgumentException("index out of bounds" + index);
         }
         return board[index];
@@ -42,9 +43,9 @@ public class LargeBoard extends GameBoard {
 
     @Override
     public void createBoard() {
-    board = new String[25];
-    for (int i = 0; i < board.length; i++) {
-        board[i] = " ";
+        board = new String[25];
+        for (int i = 0; i < board.length; i++) {
+            board[i] = " ";
         }
     }
 

@@ -13,7 +13,7 @@ public class EasyComputer implements ComputerPlayer {
         int choice;
         do {
             choice = rng.nextInt(board.getSize());
-         } while (!board.checkMove(choice, mySymbol));
+        } while (!board.checkMove(choice, mySymbol));
         return choice;
     }
 

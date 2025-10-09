@@ -1,6 +1,6 @@
 public interface ComputerPlayer {
 
-     int computerChoice(String mySymbol, String opponentSymbol);
+    int computerChoice(String mySymbol, String opponentSymbol);
 
 
 }

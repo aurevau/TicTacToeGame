@@ -3,25 +3,32 @@ public abstract class GameBoard {
     private Player currentPlayer;
 
     public abstract int getSize();
+
     public abstract String getCell(int index);
+
     public abstract void createBoard();
+
     public abstract String getLine();
+
     public abstract int getColumns();
-//    public abstract String checkWinner();
+
+    //    public abstract String checkWinner();
     public abstract void setMove(int index, String symbol);
-//    public abstract int findWinningMove(String symbol);
+
+    //    public abstract int findWinningMove(String symbol);
     public abstract int[] getCenterCells();
+
     public abstract int[][] getWinningPatterns();
 
-    public void setCurrentPlayer(Player player){
+    public void setCurrentPlayer(Player player) {
         this.currentPlayer = player;
     }
 
-    public Player getCurrentPlayer(){
+    public Player getCurrentPlayer() {
         return currentPlayer;
     }
 
-    public String getRules(){
+    public String getRules() {
         return " RULES" +
                 "\n - To win this game, you have to get " + getColumns() + " symbols in a row; diagonal, horizontal or vertical." +
                 "\n - You and your opponent take turns placing your symbols" +
@@ -29,35 +36,35 @@ public abstract class GameBoard {
                 "\n Press Enter to continue";
     }
 
-    public String checkWinner(){
+    public String checkWinner() {
         int[][] winPatterns = getWinningPatterns();
 
-        for (int[] pattern : winPatterns){
+        for (int[] pattern : winPatterns) {
             String first = board[pattern[0]];
-            if (!first.equals(" ")){
+            if (!first.equals(" ")) {
                 boolean allMatch = true;
-                for (int i = 1; i < pattern.length; i++){
-                    if (!board[pattern[i]].equals(first)){
+                for (int i = 1; i < pattern.length; i++) {
+                    if (!board[pattern[i]].equals(first)) {
                         allMatch = false;
                         break;
                     }
                 }
-                if (allMatch){
+                if (allMatch) {
                     return first;
                 }
             }
         }
 
         for (String cell : board) {
-            if (cell.equals(" ")){
+            if (cell.equals(" ")) {
                 return " ";
             }
         }
         return "draw!";
     }
 
-    public int findWinningMove(String symbol){
-        for (int [] pattern : getWinningPatterns()) {
+    public int findWinningMove(String symbol) {
+        for (int[] pattern : getWinningPatterns()) {
             int count = 0;
             int emptyIndex = -1;
 
@@ -67,7 +74,7 @@ public abstract class GameBoard {
                 } else if (board[i].equals(" ") && emptyIndex == -1) {
                     emptyIndex = i;
                 }
-            } // Försök vinna om möjligt
+            }
             if (count == getColumns() - 1 && emptyIndex != -1) {
                 return emptyIndex;
             }
@@ -76,29 +83,25 @@ public abstract class GameBoard {
     }
 
 
-    public void printAnotherBoard(){
+    public void printAnotherBoard() {
         System.out.println(getLine());
-        for (int i = 0; i < board.length; i++){
+        for (int i = 0; i < board.length; i++) {
 
             String cell = board[i];
             if (cell.equals(" ")) {
                 int number = i + 1;
-                // Alla celler får 2 tecken breda, högerjusterade
                 cell = String.format("%2d", number);
             } else {
-                // X eller O får också 2 tecken, så att brädet blir jämnt
                 cell = String.format(" %s", cell);
             }
 
             System.out.print("| " + cell + " ");
-//            System.out.print("| " + board[i] + " ");
             if ((i + 1) % getColumns() == 0) {
                 System.out.println("|");
                 System.out.println(getLine());
             }
         }
     }
-
 
 
     public boolean checkMove(int index, String symbol) {
@@ -116,12 +119,10 @@ public abstract class GameBoard {
             return true;
         } else {
             if (!board[index].equals(" ")) {
+                // So the computer don't print the messages above!
                 return false;
             }
-
-
-        } return true;
-
+        }
+        return true;
     }
-
 }
