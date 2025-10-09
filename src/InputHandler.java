@@ -57,6 +57,10 @@ public class InputHandler {
             System.exit(0);
         }
 
+        if (result <1) {
+            System.out.println("Negative numbers not allowed!");
+        }
+
 
         return result;
     }

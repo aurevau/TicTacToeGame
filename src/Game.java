@@ -108,7 +108,7 @@ public class Game {
                     InputHandler.getString();
                     return;
                 default:
-                    System.out.println("Invalid choice, try again!");
+                    System.out.println("Try again!");
             }
         }
     }
@@ -135,7 +135,7 @@ public class Game {
                     System.exit(0);
                     return;
                 default:
-                    System.out.println("Invalid choice, try again!");
+                    System.out.println("Try again!");
             }
         }
     }
@@ -163,7 +163,7 @@ public class Game {
                     System.out.println("You chose hard mode");
                     return;
                 default:
-                    System.out.println("Invalid choice, try again!");
+                    System.out.println("Try again!");
             }
 
         }
@@ -184,7 +184,7 @@ public class Game {
                 }
 
                 if (duplicate) {
-                    System.out.println("Name already exsists, try again!");
+                    System.out.println("Name already excist, try again!");
                 } else {
                     players.add(new Player(name));
                     break;
