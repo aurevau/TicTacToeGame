@@ -18,8 +18,8 @@ public class Game {
 
     public void startGame() {
         System.out.println("Welcome to Tic Tac Toe!");
+        chooseGameSize();
         chooseOpponent();
-        chooseGame();
         setSymbols();
         gameLoop();
 
@@ -67,17 +67,24 @@ public class Game {
 
             printScore();
             System.out.println("Press Enter to play again!('quit' to quit game)");
+            System.out.println("Write 'reboot' to start over");
             String input = InputHandler.getString();
 
             if (input.equalsIgnoreCase("quit")) {
                 return true;
             }
+
+            if (input.equalsIgnoreCase("reboot")) {
+                new Game();
+                return true;
+            }
+
             board.createBoard();
         }
         return false;
     }
 
-    public void chooseGame() {
+    public void chooseGameSize() {
         while (true) {
             System.out.println("Choose Game board size: ");
             System.out.println("1. 3 x 3 ");
