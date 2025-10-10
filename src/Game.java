@@ -14,7 +14,6 @@ public class Game {
     public Game() {
         startGame();
 
-
     }
 
     public void startGame() {
@@ -191,10 +190,7 @@ public class Game {
 
         p1 = players.get(0);
         if (playerNumber == 1) {
-            p2 = new Player("COMPUTER");
-            players.add(p2);
-            System.out.println("Player 2 is the " + players.get(1).getName());
-            chooseLevel();
+            addComputerPlayer();
 
         } else {
             p2 = players.get(1);
@@ -205,22 +201,25 @@ public class Game {
 
     }
 
-    public void setSymbols() {
+    public void addComputerPlayer(){
+        p2 = new Player("COMPUTER");
+        players.add(p2);
+        System.out.println("Player 2 is the " + players.get(1).getName());
+        chooseLevel();
+    }
 
+    public void setSymbols() {
         while (true) {
             System.out.println(currentPlayer.getName() + ": choose your weapon: 'x' or 'o'");
-            players.get(0).setSymbol(InputHandler.getString());
+            players.get(0).setSymbol(InputHandler.getString().toLowerCase());
             currentPlayer = players.get(0);
 
 
             if (players.get(0).getSymbol().equalsIgnoreCase("X")) {
-//                players.get(0).setSymbol("x");
                 players.get(1).setSymbol("o");
-
                 break;
 
             } else if (players.get(0).getSymbol().equalsIgnoreCase("O")) {
-//                players.get(0).setSymbol("o");
                 players.get(1).setSymbol("x");
                 break;
 
