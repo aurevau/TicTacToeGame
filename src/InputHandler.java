@@ -32,7 +32,7 @@ public class InputHandler {
             }
 
             if (!validInput) {
-                System.out.println("Invalid input, name cannot contain numbers! Try again: ");
+                System.out.println("Invalid input, can only containt letters! Try again: ");
             } else if (!validLength) {
                 System.out.println("Invalid input, name must be longer! Try again: ");
             }
