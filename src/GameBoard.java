@@ -12,10 +12,8 @@ public abstract class GameBoard {
 
     public abstract int getColumns();
 
-    //    public abstract String checkWinner();
     public abstract void setMove(int index, String symbol);
 
-    //    public abstract int findWinningMove(String symbol);
     public abstract int[] getCenterCells();
 
     public abstract int[][] getWinningPatterns();
@@ -24,9 +22,9 @@ public abstract class GameBoard {
         this.currentPlayer = player;
     }
 
-    public Player getCurrentPlayer() {
-        return currentPlayer;
-    }
+//    public Player getCurrentPlayer() {
+//        return currentPlayer;
+//    }
 
     public String getRules() {
         return " RULES" +
@@ -82,8 +80,7 @@ public abstract class GameBoard {
         return -1;
     }
 
-
-    public void printAnotherBoard() {
+    public void printBoard() {
         System.out.println(getLine());
         for (int i = 0; i < board.length; i++) {
 

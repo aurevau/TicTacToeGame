@@ -16,7 +16,6 @@ public class InputHandler {
     public static String getName() {
         String name;
 
-
         boolean validLength;
         boolean validInput;
         while (true) {

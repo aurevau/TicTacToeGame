@@ -17,11 +17,6 @@ public class Game {
 
     }
 
-    public static void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-
     public void startGame() {
         System.out.println("Welcome to Tic Tac Toe!");
         chooseGame();
@@ -39,10 +34,8 @@ public class Game {
 
             if (!gameOver) {
                 takeTurns();
-
             }
         }
-
     }
 
     public void takeTurns() {
@@ -59,7 +52,7 @@ public class Game {
         String winner = board.checkWinner();
 
         if (!winner.equals(" ")) {
-            board.printAnotherBoard();
+            board.printBoard();
             if (winner.equals("draw!")) {
                 System.out.println("It's a draw!");
                 currentPlayer.addDraws();
@@ -74,10 +67,15 @@ public class Game {
 
             printScore();
             System.out.println("Press Enter to play again!('quit' to quit game)");
-            if (InputHandler.getString().equalsIgnoreCase("quit")) {
+            System.out.println("Write 'menu' to start over");
+            String input = InputHandler.getString();
+
+            if (input.equalsIgnoreCase("quit")) {
+                return true;
+            } else if (input.equalsIgnoreCase("menu")) {
+                startGame();
                 return true;
             }
-
             board.createBoard();
         }
         return false;
@@ -119,7 +117,6 @@ public class Game {
             System.out.println("1. Against a friend");
             System.out.println("2. Against a computer");
             System.out.println("3. Quit Game");
-
 
             int choice = InputHandler.getInt();
 
@@ -256,7 +253,7 @@ public class Game {
 
             } else {
                 if (firstMove) {
-                    board.printAnotherBoard();
+                    board.printBoard();
                     System.out.println(currentPlayer.getName() + "(" + currentPlayer.getSymbol() + "): choose where to put your mark(1-" + board.getSize() + ")");
                     firstMove = false;
                 }

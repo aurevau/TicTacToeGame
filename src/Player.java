@@ -5,8 +5,7 @@ public class Player {
     private int losses;
     private int draws;
     private String symbol;
-    private Player opponent;
-
+    
     public Player(String name) {
         this.name = name;
     }

@@ -10,7 +10,6 @@ public class HardComputer implements ComputerPlayer {
         this.board = board;
     }
 
-
     @Override
     public int computerChoice(String mySymbol, String opponentSymbol) {
         int winningMove = board.findWinningMove(mySymbol);
@@ -19,7 +18,6 @@ public class HardComputer implements ComputerPlayer {
             System.out.println();
             return winningMove;
         }
-
 
         int blockMove = board.findWinningMove(opponentSymbol);
         if (blockMove != -1 && board.checkMove(blockMove, mySymbol)) {
@@ -34,7 +32,6 @@ public class HardComputer implements ComputerPlayer {
             }
         }
 
-
         if (!availableMoves.isEmpty()) {
             return availableMoves.get(rng.nextInt(availableMoves.size()));
 
@@ -45,6 +42,5 @@ public class HardComputer implements ComputerPlayer {
             choice = rng.nextInt(board.getSize());
         } while (!board.checkMove(choice, mySymbol));
         return choice;
-
     }
 }
