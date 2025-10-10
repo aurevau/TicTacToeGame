@@ -253,7 +253,7 @@ public class Game {
 
                 validMove = true;
                 board.setMove(inputNumber, currentPlayer.getSymbol());
-                System.out.println("Computer chose: " + (inputNumber + 1));
+                System.out.println("Computer("  + p2.getSymbol() +"), chose: " + (inputNumber + 1));
 
             } else {
                 if (firstMove) {
