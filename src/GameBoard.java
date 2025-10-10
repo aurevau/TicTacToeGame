@@ -22,9 +22,6 @@ public abstract class GameBoard {
         this.currentPlayer = player;
     }
 
-//    public Player getCurrentPlayer() {
-//        return currentPlayer;
-//    }
 
     public String getRules() {
         return " RULES" +
