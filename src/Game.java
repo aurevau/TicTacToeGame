@@ -9,6 +9,9 @@ public class Game {
     List<Player> players = new ArrayList<>();
     private GameBoard board;
     private ComputerPlayer cpu;
+    private int maxWins = 0;
+    private int maxRounds = 0;
+    private int roundsPlayed = 0;
 
 
     public Game() {
@@ -66,23 +69,23 @@ public class Game {
             }
 
             printScore();
+
             System.out.println("Press Enter to play again!('quit' to quit game)");
             System.out.println("Write 'reboot' to start over");
             String input = InputHandler.getString();
 
             if (input.equalsIgnoreCase("quit")) {
                 return true;
-            }
-
-            if (input.equalsIgnoreCase("reboot")) {
+            } else if (input.equalsIgnoreCase("reboot")) {
                 new Game();
                 return true;
+            } else {
+                board.createBoard();
             }
-
-            board.createBoard();
         }
         return false;
     }
+
 
     public void chooseGameSize() {
         while (true) {
@@ -260,7 +263,6 @@ public class Game {
                 }
 
                 inputNumber = InputHandler.getInt() - 1;
-
 
                 if (board.checkMove(inputNumber, currentPlayer.getSymbol())) {
                     board.setMove(inputNumber, currentPlayer.getSymbol());

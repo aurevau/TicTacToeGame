@@ -48,6 +48,7 @@ public class InputHandler {
 
         int result = input.nextInt();
         input.nextLine();
+
         if (result == -1) {
             System.exit(0);
         }
@@ -57,4 +58,5 @@ public class InputHandler {
         }
         return result;
     }
+
 }
