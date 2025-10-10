@@ -18,10 +18,11 @@ public class Game {
 
     public void startGame() {
         System.out.println("Welcome to Tic Tac Toe!");
-        chooseGame();
         chooseOpponent();
+        chooseGame();
         setSymbols();
         gameLoop();
+
     }
 
     public void gameLoop() {
@@ -66,13 +67,9 @@ public class Game {
 
             printScore();
             System.out.println("Press Enter to play again!('quit' to quit game)");
-            System.out.println("Write 'menu' to start over");
             String input = InputHandler.getString();
 
             if (input.equalsIgnoreCase("quit")) {
-                return true;
-            } else if (input.equalsIgnoreCase("menu")) {
-                startGame();
                 return true;
             }
             board.createBoard();
@@ -214,7 +211,6 @@ public class Game {
             players.get(0).setSymbol(InputHandler.getString().toLowerCase());
             currentPlayer = players.get(0);
 
-
             if (players.get(0).getSymbol().equalsIgnoreCase("X")) {
                 players.get(1).setSymbol("o");
                 break;
@@ -233,7 +229,6 @@ public class Game {
         System.out.println(players.get(0).getName() + " : " + players.get(0).getSymbol());
         System.out.println(players.get(1).getName() + ": " + players.get(1).getSymbol());
     }
-
 
     public void getInput() {
         int inputNumber;
@@ -271,6 +266,7 @@ public class Game {
 
         }
     }
+
 
     public void printScore() {
         System.out.println("        HIGHSCHORE");
