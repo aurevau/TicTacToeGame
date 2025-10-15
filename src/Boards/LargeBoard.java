@@ -1,29 +1,28 @@
-public class SmallBoard extends GameBoard {
+package Boards;
+
+public class LargeBoard extends GameBoard {
     private int[][] winPatterns = {
-            {0, 1, 2}, {3, 4, 5}, {6, 7, 8},
-            {0, 3, 6}, {1, 4, 7}, {2, 5, 8},
-            {0, 4, 8}, {2, 4, 6}
+            {0, 1, 2, 3, 4}, {5, 6, 7, 8, 9}, {10, 11, 12, 13, 14}, {15, 16, 17, 18, 19}, {20, 21, 22, 23, 24},
+            {0, 5, 10, 15, 20}, {1, 6, 11, 16, 21}, {2, 7, 12, 17, 22}, {3, 8, 13, 18, 23}, {4, 9, 14, 19, 24},
+            {0, 6, 12, 18, 24}, {4, 8, 12, 16, 20}
+
     };
 
-
-    public SmallBoard() {
+    public LargeBoard() {
         createBoard();
     }
 
-    public String getLine() {
-        return "|----+----+----|";
-    }
-
     public int getColumns() {
-        return 3;
+        return 5;
     }
 
-    public String[] getBoard() {
-        return board;
+
+    public String getLine() {
+        return "|----+----+----+----+----|";
     }
 
     public int[] getCenterCells() {
-        return new int[]{4};
+        return new int[]{12};
     }
 
     @Override
@@ -46,15 +45,18 @@ public class SmallBoard extends GameBoard {
 
     @Override
     public void createBoard() {
-        board = new String[9];
+        board = new String[25];
         for (int i = 0; i < board.length; i++) {
             board[i] = " ";
         }
     }
 
+
     @Override
     public void setMove(int index, String symbol) {
         board[index] = symbol;
 
+
     }
+
 }

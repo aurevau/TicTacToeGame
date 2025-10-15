@@ -1,3 +1,5 @@
+package Computers;
+
 import java.util.Random;
 
 public class EasyComputer implements ComputerPlayer {

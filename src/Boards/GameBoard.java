@@ -1,3 +1,5 @@
+package Boards;
+
 public abstract class GameBoard {
     protected String[] board;
     private Player currentPlayer;
